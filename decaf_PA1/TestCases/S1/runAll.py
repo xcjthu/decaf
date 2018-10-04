@@ -40,6 +40,7 @@ def main():
             info = 'OK :)'
         else:
             info = 'ERROR!'
+            print(actual)
         print('{0:<30}{1}'.format(name,info))
     if os.name == 'nt':
         print('Press Enter to continue...')

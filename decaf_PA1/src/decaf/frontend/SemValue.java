@@ -22,6 +22,8 @@ public class SemValue {
 	public int typeTag;
 	
 	public Object literal;
+
+	public boolean seal;
 	
 	public String ident;
 
@@ -33,6 +35,11 @@ public class SemValue {
 	public List<Tree> flist;
 
 	public List<VarDef> vlist;
+
+	/**
+	 * ifguarded statement list
+	 */
+	public List<Tree.IfSub> iflist;
 
 
 	/**
@@ -49,6 +56,8 @@ public class SemValue {
 	public VarDef vdef;
 
 	public MethodDef fdef;
+
+	public Tree.IfSub ifsub;
 
 	public TypeLiteral type;
 

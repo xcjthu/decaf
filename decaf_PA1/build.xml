@@ -13,7 +13,7 @@
 	<property name="bin.dir" value="${result.dir}/bin" />
 	<property name="doc.dir" value="${result.dir}/doc" />
 	<property name="jflex.jar" value="tools/jflex/JFlex.jar" />
-	<condition property="byacc" value="tools/byacc/byacc.exe">
+	<condition property="byacc" value="${basedir}/tools/byacc/byacc.exe">
 		<or>
 			<os family="windows" arch="x86" />
 			<os family="windows" arch="amd64" />

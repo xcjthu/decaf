@@ -33,6 +33,7 @@ import java.util.*;
 %token LESS_EQUAL   GREATER_EQUAL  EQUAL   NOT_EQUAL
 %token '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 %token ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
+%token SCOPY SEALED IFOR VAR
 
 %left OR
 %left AND 
@@ -64,6 +65,7 @@ ClassList       :	ClassList ClassDef
                 		$$.clist.add($1.cdef);
                 	}
                 ;
+
 
 VariableDef     :	Variable ';'
 				;
@@ -100,11 +102,22 @@ Type            :	INT
                 	}
                 ;
 
-ClassDef        :	CLASS IDENTIFIER ExtendsClause '{' FieldList '}'
+ClassDef        :	SealDef CLASS IDENTIFIER ExtendsClause '{' FieldList '}'
 					{
-						$$.cdef = new Tree.ClassDef($2.ident, $3.ident, $5.flist, $1.loc);
+						$$.cdef = new Tree.ClassDef($1.seal, $3.ident, $4.ident, $6.flist, $1.loc);
 					}
+				
                 ;
+SealDef			: SEALED
+					{
+						$$.seal = Tree.SEALED;
+					}
+				|	/* empty */
+					{
+						$$ = new SemValue();
+						$$.seal = Tree.UNSEALED;
+					}
+				;
 
 ExtendsClause	:	EXTENDS IDENTIFIER
 					{
@@ -189,11 +202,13 @@ Stmt		    :	VariableDef
                 		}
                 	}
                 |	IfStmt
+                |   GuardedStmt
                 |	WhileStmt
                 |	ForStmt
                 |	ReturnStmt ';'
                 |	PrintStmt ';'
                 |	BreakStmt ';'
+                |	OCStmt ";"
                 |	StmtBlock
                 ;
 
@@ -229,6 +244,10 @@ LValue          :	Receiver IDENTIFIER
                 	{
                 		$$.lvalue = new Tree.Indexed($1.expr, $3.expr, $1.loc);
                 	}
+                | VAR IDENTIFIER
+                    {
+                        $$.lvalue = new Tree.VarStmt($2.ident, $1.loc);
+                    }
                 ;
 
 Call            :	Receiver IDENTIFIER '(' Actuals ')'
@@ -386,11 +405,45 @@ BreakStmt       :	BREAK
 						$$.stmt = new Tree.Break($1.loc);
 					}
                 ;
+                
+OCStmt			: 	SCOPY '(' IDENTIFIER ',' Expr ')'
+					{
+						$$.stmt = new Tree.Scopy($3.ident, $5.expr, $1.loc);
+					}
+				;
 
 IfStmt          :	IF '(' Expr ')' Stmt ElseClause
 					{
 						$$.stmt = new Tree.If($3.expr, $5.stmt, $6.stmt, $1.loc);
 					}
+                ;
+
+GuardedStmt     :   IF '{' IfSubStmtList '}'
+                    {
+                        $$.stmt = new Tree.Guard($3.iflist, $1.loc);
+                    }
+                ;
+
+IfSubStmtList   :   IfSubStmtList IFOR IfSubStmt
+                    {
+                        $$.iflist.add($3.ifsub);
+                    }
+                |   IfSubStmt
+                    {
+
+                        $$.iflist = new ArrayList<Tree.IfSub>();
+                        $$.iflist.add($1.ifsub);
+                    }
+                |   /* empty */
+                    {
+                        $$.iflist = new ArrayList<Tree.IfSub>();
+                    }
+                ;
+
+IfSubStmt       :   Expr ':' Stmt
+                    {
+                        $$.ifsub = new Tree.IfSub($1.expr, $3.stmt, $1.loc);
+                    }
                 ;
 
 ElseClause      :	ELSE Stmt

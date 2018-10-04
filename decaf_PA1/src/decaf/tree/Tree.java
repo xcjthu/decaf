@@ -94,6 +94,8 @@ public abstract class Tree {
      */
     public static final int LABELLED = FORLOOP + 1;
 
+    public static final int CASE = LABELLED + 1;
+
     /**
      * Synchronized statements, of type Synchonized.
      */
@@ -281,13 +283,33 @@ public abstract class Tree {
     public static final int READLINEEXPR = READINTEXPR + 1;
     public static final int PRINT = READLINEEXPR + 1;
     
+    
+
+    /**
+     * my key nodes id
+     */
+    
+    public static final int SCOPY = PRINT + 1;
+    public static final int IFSUB = SCOPY + 1;
+    public static final int GUARD = IFSUB + 1;
+    public static final int VARSTMT = GUARD + 1;
+    
+    
+    
+    
     /**
      * Tags for Literal and TypeLiteral
      */
     public static final int VOID = 0; 
     public static final int INT = VOID + 1; 
     public static final int BOOL = INT + 1; 
-    public static final int STRING = BOOL + 1; 
+    public static final int STRING = BOOL + 1;
+
+
+    public static final boolean SEALED = true;
+    public static final boolean UNSEALED = false;
+    
+    
 
 
     public Location loc;
@@ -343,15 +365,17 @@ public abstract class Tree {
     public static class ClassDef extends Tree {
     	
     	public String name;
+    	public boolean sealed;
     	public String parent;
     	public List<Tree> fields;
 
-        public ClassDef(String name, String parent, List<Tree> fields,
+        public ClassDef(boolean sealed, String name, String parent, List<Tree> fields,
     			Location loc) {
     		super(CLASSDEF, loc);
     		this.name = name;
     		this.parent = parent;
     		this.fields = fields;
+    		this.sealed = sealed;
         }
 
     	@Override
@@ -361,8 +385,15 @@ public abstract class Tree {
         
     	@Override
     	public void printTo(IndentPrintWriter pw) {
-    		pw.println("class " + name + " "
-    				+ (parent != null ? parent : "<empty>"));
+            if (sealed){
+                pw.println("sealed class " + name + " "
+                        + (parent != null ? parent : "<empty>"));
+            }
+            else{
+                pw.println("class " + name + " "
+                        + (parent != null ? parent : "<empty>"));
+            }
+
     		pw.incIndent();
     		for (Tree f : fields) {
     			f.printTo(pw);
@@ -483,6 +514,33 @@ public abstract class Tree {
     }
 
     /**
+     * A guarded statement
+     */
+    public static class Guard extends Tree {
+        public List<IfSub> iflist;
+        public Guard(List<IfSub> iflist, Location loc){
+            super(GUARD, loc);
+            this.iflist = iflist;
+        }
+        @Override
+        public void accept(Visitor v){
+            v.visitGuard(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("guarded");
+            pw.incIndent();
+            if (iflist.size() == 0)
+                pw.println("<empty>");
+            for (IfSub s: iflist){
+                s.printTo(pw);
+            }
+            pw.decIndent();
+        }
+    }
+
+    /**
       * A while loop
       */
     public static class WhileLoop extends Tree {
@@ -599,6 +657,35 @@ public abstract class Tree {
     	}
     }
 
+
+    /**
+     * An "if {E1:S1 ||| E2:S2 ...}" block
+     */
+    public static class IfSub extends Tree {
+        Expr expr;
+        Tree statementBody;
+
+        public IfSub(Expr expr, Tree body, Location loc){
+            super(IFSUB, loc);
+            this.expr = expr;
+            this.statementBody = body;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitIfSub(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("guard");
+            pw.incIndent();
+            expr.printTo(pw);
+            statementBody.printTo(pw);
+            pw.decIndent();
+        }
+    }
+
     /**
       * an expression statement
       * @param expr expression structure
@@ -669,6 +756,33 @@ public abstract class Tree {
     		}
     		pw.decIndent();
         }
+    }
+    
+    public static class Scopy extends Tree {
+    	public String name;
+    	public Expr expr;
+    	
+    	public Scopy(String name, Expr expr, Location loc) {
+    		super(SCOPY, loc);
+    		this.expr = expr;
+    		this.name = name;
+    	}
+    	
+    	@Override
+    	public void accept(Visitor v) {
+    		v.visitScopy(this);
+    	}
+    	
+    	@Override
+    	public void printTo(IndentPrintWriter pw) {
+    		pw.println("scopy");
+    		pw.incIndent();
+    		pw.println(name);
+    		expr.printTo(pw);
+    		pw.decIndent();
+    		
+    	}
+    	
     }
 
     /**
@@ -1162,6 +1276,28 @@ public abstract class Tree {
     }
 
     /**
+     * var statement
+     */
+    public static class VarStmt extends LValue{
+        public String name;
+        public VarStmt(String name, Location loc){
+            super(VARSTMT, loc);
+            this.name = name;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitVarStmt(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("var " + name);
+
+        }
+    }
+
+    /**
       * A constant value given literally.
       * @param value value representation
       */
@@ -1195,6 +1331,8 @@ public abstract class Tree {
     		}
     	}
     }
+    
+
     public static class Null extends Expr {
 
         public Null(Location loc) {
@@ -1443,6 +1581,22 @@ public abstract class Tree {
 
         public void visitTree(Tree that) {
             assert false;
+        }
+        
+        public void visitScopy(Scopy that) {
+        	visitTree(that);
+        }
+
+        public void visitIfSub(IfSub that){
+            visitTree(that);
+        }
+
+        public void visitGuard(Guard that){
+            visitTree(that);
+        }
+
+        public void visitVarStmt(VarStmt that){
+            visitTree(that);
         }
     }
 }
