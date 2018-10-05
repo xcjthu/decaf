@@ -33,18 +33,22 @@ import java.util.*;
 %token LESS_EQUAL   GREATER_EQUAL  EQUAL   NOT_EQUAL
 %token '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 %token ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
-%token SCOPY SEALED IFOR VAR
+%token SCOPY SEALED IFOR VAR DOUBLEMOD DOUBLEPLUS
+%token DEFAULT
 
 %left OR
 %left AND 
 %nonassoc EQUAL NOT_EQUAL
 %nonassoc LESS_EQUAL GREATER_EQUAL '<' '>'
+%right DOUBLEPLUS
+%left DOUBLEMOD
 %left  '+' '-'
 %left  '*' '/' '%'  
 %nonassoc UMINUS '!' 
 %nonassoc '[' '.' 
 %nonassoc ')' EMPTY
 %nonassoc ELSE
+%nonassoc DEFAULT
 
 %start Program
 
@@ -265,6 +269,22 @@ Expr            :	LValue
 					}
                 |	Call
                 |	Constant
+                |   Expr DOUBLEMOD Expr
+                    {
+                        $$.expr = new Tree.ArrayConstDoubleMod($1.expr, $3.expr, $1.loc);
+                    }
+                |   Expr DOUBLEPLUS Expr
+                    {
+                        $$.expr = new Tree.ArrayDoublePlus($1.expr, $3.expr, $1.loc);
+                    }
+                |   Expr '[' Expr ':' Expr ']'
+                    {
+                        $$.expr = new Tree.ArraySubArray($1.expr, $3.expr, $5.expr, $1.loc);
+                    }
+                |   Expr '[' Expr ']' DEFAULT Expr
+                    {
+                        $$.expr = new Tree.ArrayDefault($1.expr, $3.expr, $6.expr, $1.loc);
+                    }
                 |	Expr '+' Expr
                 	{
                 		$$.expr = new Tree.Binary(Tree.PLUS, $1.expr, $3.expr, $2.loc);
@@ -363,11 +383,31 @@ Constant        :	LITERAL
 					{
 						$$.expr = new Tree.Literal($1.typeTag, $1.literal, $1.loc);
 					}
+                |   '[' ConstantList ']'
+                    {
+                        $$.expr = new Tree.ArrayConstant($2.elist, $1.loc);
+                    }
+                |   '[' ']'
+                    {
+                        $$.expr = new Tree.ArrayConstant(new ArrayList<Tree.Expr>(), $1.loc);
+                    }
                 |	NULL
                 	{
 						$$.expr = new Null($1.loc);
 					}
                 ;
+
+ConstantList    :   ConstantList ',' Constant
+                    {
+                        $$.elist.add($3.expr);
+                    }
+                |   Constant
+                    {
+                        $$.elist = new ArrayList<Tree.Expr>();
+                        $$.elist.add($1.expr);
+                    }
+                ;
+
 
 Actuals         :	ExprList
                 |	/* empty */

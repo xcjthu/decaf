@@ -293,6 +293,11 @@ public abstract class Tree {
     public static final int IFSUB = SCOPY + 1;
     public static final int GUARD = IFSUB + 1;
     public static final int VARSTMT = GUARD + 1;
+    public static final int ARRAYCONSTANT = VARSTMT + 1;
+    public static final int ARRAYCONSTDOUBLEMOD = ARRAYCONSTANT + 1;
+    public static final int ARRAYDOUBLEPLUS = ARRAYCONSTDOUBLEMOD + 1;
+    public static final int ARRAYSUBARRAY = ARRAYDOUBLEPLUS + 1;
+    public static final int ARRAYDEFAULT = ARRAYSUBARRAY + 1;
     
     
     
@@ -1302,7 +1307,6 @@ public abstract class Tree {
       * @param value value representation
       */
     public static class Literal extends Expr {
-
     	public int typeTag;
         public Object value;
 
@@ -1348,6 +1352,143 @@ public abstract class Tree {
     	public void printTo(IndentPrintWriter pw) {
   			pw.println("null");
     	}
+    }
+
+    public static class ArrayConstant extends Expr{
+        public List<Expr> exprList;
+        public ArrayConstant(List<Expr> contentList, Location loc){
+            super(ARRAYCONSTANT, loc);
+            this.exprList = contentList;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitArrayConstant(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("array const");
+            pw.incIndent();
+            if (exprList.size() == 0)
+                pw.println("<empty>");
+            for (Expr expr : exprList) {
+                expr.printTo(pw);
+            }
+            pw.decIndent();
+
+        }
+    }
+
+    public static class ArrayConstDoubleMod extends Expr{
+        Expr expr1;
+        Expr expr2;
+        public ArrayConstDoubleMod(Expr expr1, Expr expr2, Location loc){
+            super(ARRAYCONSTDOUBLEMOD, loc);
+            this.expr1 = expr1;
+            this.expr2 = expr2;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitArrayConstDoubleMod(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("array repeat");
+            pw.incIndent();
+            expr1.printTo(pw);
+            expr2.printTo(pw);
+            pw.decIndent();
+        }
+    }
+
+    public static class ArrayDoublePlus extends Expr{
+        Expr expr1;
+        Expr expr2;
+        public ArrayDoublePlus(Expr expr1, Expr expr2, Location loc){
+            super(ARRAYDOUBLEPLUS, loc);
+            this.expr1 = expr1;
+            this.expr2 = expr2;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitArrayDoublePlus(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("array concat");
+            pw.incIndent();
+            expr1.printTo(pw);
+            expr2.printTo(pw);
+            pw.decIndent();
+        }
+    }
+
+    public static class ArraySubArray extends Expr{
+        Expr expr1;
+        Expr expr2;
+        Expr expr3;
+
+        public ArraySubArray(Expr expr1, Expr expr2, Expr expr3, Location loc){
+            super(ARRAYSUBARRAY, loc);
+            this.expr1 = expr1;
+            this.expr2 = expr2;
+            this.expr3 = expr3;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitArraySubArray(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("arrref");
+            pw.incIndent();
+            expr1.printTo(pw);
+            pw.println("range");
+            pw.incIndent();
+            expr2.printTo(pw);
+            expr3.printTo(pw);
+            pw.decIndent();
+            pw.decIndent();
+        }
+    }
+
+    public static class ArrayDefault extends Expr{
+        Expr expr1;
+        Expr expr2;
+        Expr expr3;
+
+        public ArrayDefault(Expr expr1, Expr expr2, Expr expr3, Location loc){
+            super(ARRAYDEFAULT, loc);
+            this.expr1 = expr1;
+            this.expr2 = expr2;
+            this.expr3 = expr3;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitArrayDefault(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("arrref");
+            pw.incIndent();
+            expr1.printTo(pw);
+            expr2.printTo(pw);
+            pw.println("default");
+            pw.incIndent();
+            expr3.printTo(pw);
+            pw.decIndent();
+            pw.decIndent();
+
+        }
     }
 
     public static abstract class TypeLiteral extends Tree {
@@ -1598,5 +1739,26 @@ public abstract class Tree {
         public void visitVarStmt(VarStmt that){
             visitTree(that);
         }
+
+        public void visitArrayConstant(ArrayConstant that){
+            visitTree(that);
+        }
+
+        public void visitArrayConstDoubleMod(ArrayConstDoubleMod that){
+            visitTree(that);
+        }
+
+        public void visitArrayDoublePlus(ArrayDoublePlus that){
+            visitTree(that);
+        }
+
+        public void visitArraySubArray(ArraySubArray that){
+            visitTree(that);
+        }
+
+        public void visitArrayDefault(ArrayDefault that){
+            visitTree(that);
+        }
+
     }
 }
