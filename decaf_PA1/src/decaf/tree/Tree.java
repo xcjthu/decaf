@@ -298,10 +298,9 @@ public abstract class Tree {
     public static final int ARRAYDOUBLEPLUS = ARRAYCONSTDOUBLEMOD + 1;
     public static final int ARRAYSUBARRAY = ARRAYDOUBLEPLUS + 1;
     public static final int ARRAYDEFAULT = ARRAYSUBARRAY + 1;
+    public static final int ARRAYCOMP = ARRAYDEFAULT + 1;
     
-    
-    
-    
+
     /**
      * Tags for Literal and TypeLiteral
      */
@@ -1491,6 +1490,43 @@ public abstract class Tree {
         }
     }
 
+    public static class ArrayComp extends Expr{
+        Expr valueExpr;
+        String identName;
+        Expr arrayExpr;
+        Expr boolExpr;
+
+        public ArrayComp(Expr valueExpr, String identName, Expr arrayExpr, Expr boolExpr, Location loc){
+            super(ARRAYCOMP, loc);
+            this.valueExpr = valueExpr;
+            this.identName = identName;
+            this.arrayExpr = arrayExpr;
+            this.boolExpr = boolExpr;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitArrayComp(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("array comp");
+            pw.incIndent();
+            pw.println("varbind " + identName);
+            arrayExpr.printTo(pw);
+            /*
+            if (boolExpr == null)
+                pw.println("boolconst true");
+            else
+            */
+            boolExpr.printTo(pw);
+            valueExpr.printTo(pw);
+            pw.decIndent();
+        }
+
+    }
+
     public static abstract class TypeLiteral extends Tree {
     	
     	public TypeLiteral(int tag, Location loc){
@@ -1757,6 +1793,10 @@ public abstract class Tree {
         }
 
         public void visitArrayDefault(ArrayDefault that){
+            visitTree(that);
+        }
+
+        public void visitArrayComp(ArrayComp that){
             visitTree(that);
         }
 

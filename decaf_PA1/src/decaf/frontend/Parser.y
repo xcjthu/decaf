@@ -34,7 +34,7 @@ import java.util.*;
 %token '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 %token ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
 %token SCOPY SEALED IFOR VAR DOUBLEMOD DOUBLEPLUS
-%token DEFAULT
+%token DEFAULT IN
 
 %left OR
 %left AND 
@@ -284,6 +284,14 @@ Expr            :	LValue
                 |   Expr '[' Expr ']' DEFAULT Expr
                     {
                         $$.expr = new Tree.ArrayDefault($1.expr, $3.expr, $6.expr, $1.loc);
+                    }
+                |   '[' Expr FOR IDENTIFIER IN Expr IF Expr ']'
+                    {
+                        $$.expr = new Tree.ArrayComp($2.expr, $4.ident, $6.expr, $8.expr, $1.loc);
+                    }
+                |   '[' Expr FOR IDENTIFIER IN Expr ']'
+                    {
+                        $$.expr = new Tree.ArrayComp($2.expr, $4.ident, $6.expr, new Tree.Literal(Tree.BOOL, true, $7.loc), $1.loc);
                     }
                 |	Expr '+' Expr
                 	{
