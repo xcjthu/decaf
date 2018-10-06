@@ -299,6 +299,7 @@ public abstract class Tree {
     public static final int ARRAYSUBARRAY = ARRAYDOUBLEPLUS + 1;
     public static final int ARRAYDEFAULT = ARRAYSUBARRAY + 1;
     public static final int ARRAYCOMP = ARRAYDEFAULT + 1;
+    public static final int FOREACHSTMT = ARRAYCOMP + 1;
     
 
     /**
@@ -308,6 +309,7 @@ public abstract class Tree {
     public static final int INT = VOID + 1; 
     public static final int BOOL = INT + 1; 
     public static final int STRING = BOOL + 1;
+    public static final int VAR = STRING + 1;
 
 
     public static final boolean SEALED = true;
@@ -620,6 +622,51 @@ public abstract class Tree {
     		pw.decIndent();
     	}
    }
+
+
+    /**
+     * foreach statement
+     */
+    public static class ForeachStmt extends Tree{
+        public String identname;
+        public TypeLiteral type;
+        public Expr inExpr;
+        public Expr whileExpr;
+        public Tree foreachBody;
+
+        public ForeachStmt(TypeLiteral type, String name, Expr inExpr, Expr whileExpr, Tree foreachBody, Location loc){
+            super(FOREACHSTMT, loc);
+
+            this.type = type;
+            this.identname = name;
+            this.inExpr = inExpr;
+            this.whileExpr = whileExpr;
+            this.foreachBody = foreachBody;
+        }
+
+        @Override
+        public void accept(Visitor v){
+            v.visitForeachStmt(this);
+        }
+
+        @Override
+        public void printTo(IndentPrintWriter pw){
+            pw.println("foreach");
+            pw.incIndent();
+            if (type == null)
+                pw.println("varbind " + identname + " var");
+            else {
+                pw.print("varbind " + identname + " ");
+                type.printTo(pw);
+                pw.println();
+            }
+            inExpr.printTo(pw);
+            whileExpr.printTo(pw);
+            foreachBody.printTo(pw);
+            pw.decIndent();
+        }
+    }
+
 
     /**
       * An "if ( ) { } else { }" block
@@ -1797,6 +1844,10 @@ public abstract class Tree {
         }
 
         public void visitArrayComp(ArrayComp that){
+            visitTree(that);
+        }
+
+        public void visitForeachStmt(ForeachStmt that){
             visitTree(that);
         }
 

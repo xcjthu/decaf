@@ -76,6 +76,7 @@ WHITESPACE			= ([ \t]+)
 "sealed"			{ return keyword(Parser.SEALED);		}
 "var"               { return keyword(Parser.VAR);         }
 "in"                { return keyword(Parser.IN);            }
+"foreach"           { return keyword(Parser.FOREACH);       }
 
 
 	// 识别操作符的规则

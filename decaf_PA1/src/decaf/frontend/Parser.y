@@ -34,7 +34,7 @@ import java.util.*;
 %token '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 %token ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
 %token SCOPY SEALED IFOR VAR DOUBLEMOD DOUBLEPLUS
-%token DEFAULT IN
+%token DEFAULT IN FOREACH
 
 %left OR
 %left AND 
@@ -209,6 +209,7 @@ Stmt		    :	VariableDef
                 |   GuardedStmt
                 |	WhileStmt
                 |	ForStmt
+                |   ForeachStmt
                 |	ReturnStmt ';'
                 |	PrintStmt ';'
                 |	BreakStmt ';'
@@ -248,7 +249,10 @@ LValue          :	Receiver IDENTIFIER
                 	{
                 		$$.lvalue = new Tree.Indexed($1.expr, $3.expr, $1.loc);
                 	}
-                | VAR IDENTIFIER
+                |   VarDef
+                ;
+
+VarDef          :   VAR IDENTIFIER
                     {
                         $$.lvalue = new Tree.VarStmt($2.ident, $1.loc);
                     }
@@ -447,6 +451,24 @@ ForStmt         :	FOR '(' SimpleStmt ';' Expr ';'	SimpleStmt ')' Stmt
 						$$.stmt = new Tree.ForLoop($3.stmt, $5.expr, $7.stmt, $9.stmt, $1.loc);
 					}
                 ;
+
+ForeachStmt     :   FOREACH '(' ForeachType IDENTIFIER IN Expr WHILE Expr ')' Stmt
+                    {
+                        $$.stmt = new Tree.ForeachStmt($3.type, $4.ident, $6.expr, $8.expr, $10.stmt, $1.loc);
+                    }
+                |   FOREACH '(' ForeachType IDENTIFIER IN Expr')' Stmt
+                    {
+                        $$.stmt = new Tree.ForeachStmt($3.type, $4.ident, $6.expr, new Tree.Literal(Tree.BOOL, true, $7.loc), $8.stmt, $1.loc);
+                    }
+                ;
+
+ForeachType     :   VAR
+                    {
+                        $$.type = null;
+                    }
+                |   Type
+                ;
+
 
 BreakStmt       :	BREAK
 					{
