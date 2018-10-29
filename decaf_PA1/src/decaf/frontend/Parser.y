@@ -34,7 +34,7 @@ import java.util.*;
 %token '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 %token ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
 %token SCOPY SEALED IFOR VAR DOUBLEMOD DOUBLEPLUS
-%token DEFAULT IN FOREACH
+%token DEFAULT IN FOREACH ARRAYCOMBEGIN ARRAYCOMEND
 
 %left OR
 %left AND 
@@ -45,10 +45,9 @@ import java.util.*;
 %left  '+' '-'
 %left  '*' '/' '%'  
 %nonassoc UMINUS '!' 
-%nonassoc '[' '.' 
+%nonassoc '[' '.' DEFAULT
 %nonassoc ')' EMPTY
 %nonassoc ELSE
-%nonassoc DEFAULT
 
 %start Program
 
@@ -110,8 +109,8 @@ ClassDef        :	SealDef CLASS IDENTIFIER ExtendsClause '{' FieldList '}'
 					{
 						$$.cdef = new Tree.ClassDef($1.seal, $3.ident, $4.ident, $6.flist, $1.loc);
 					}
-				
                 ;
+
 SealDef			: SEALED
 					{
 						$$.seal = Tree.SEALED;

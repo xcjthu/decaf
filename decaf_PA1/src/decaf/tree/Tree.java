@@ -369,14 +369,12 @@ public abstract class Tree {
     }
 
     public static class ClassDef extends Tree {
-    	
     	public String name;
     	public boolean sealed;
     	public String parent;
     	public List<Tree> fields;
 
-        public ClassDef(boolean sealed, String name, String parent, List<Tree> fields,
-    			Location loc) {
+        public ClassDef(boolean sealed, String name, String parent, List<Tree> fields, Location loc) {
     		super(CLASSDEF, loc);
     		this.name = name;
     		this.parent = parent;
@@ -833,7 +831,6 @@ public abstract class Tree {
     		pw.decIndent();
     		
     	}
-    	
     }
 
     /**

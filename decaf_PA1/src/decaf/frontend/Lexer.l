@@ -77,6 +77,8 @@ WHITESPACE			= ([ \t]+)
 "var"               { return keyword(Parser.VAR);         }
 "in"                { return keyword(Parser.IN);            }
 "foreach"           { return keyword(Parser.FOREACH);       }
+"[|"                { return keyword(Parser.ARRAYCOMBEGIN); }
+"|]"                { return keyword(Parser.ARRAYCOMEND);   }
 
 
 	// 识别操作符的规则
