@@ -58,7 +58,7 @@ public class Parser extends Table {
         issueError("syntax error");
     }
 
-    private void myerror() { issueError("my syntax error");}
+    // private void myerror() { issueError("my syntax error");}
 
     /**
      * Lexer caller.
@@ -89,12 +89,18 @@ public class Parser extends Table {
         //System.out.println(follow.size());
         // System.out.println(lookahead);
 
+        // System.out.println("symbol " + symbol);
         //错误处理
-        if (result == null){
-            myerror();
+        //if (result == null){
+        if (!beginSet(symbol).contains(lookahead)){
+            error();
+            // System.out.println("has been error");
+            // System.out.println("lookahead " + lookahead);
+            // System.out.println("IDENTIFIER " + Parser.IDENTIFIER);
+            // System.out.print("test:" + (query(367, Integer.valueof(':'))));
             iserror = true;
             while (true){
-                lookahead = lex();
+
                 // if (lookahead == eof || lookahead == eos)
                 //    return null;
                 if (beginSet(symbol).contains(lookahead)){
@@ -104,6 +110,7 @@ public class Parser extends Table {
                 else if(followSet(symbol).contains(lookahead) || follow.contains(lookahead)){
                     return null;
                 }
+                lookahead = lex();
             }
         }
 
@@ -113,14 +120,16 @@ public class Parser extends Table {
         int length = right.size();
         SemValue[] params = new SemValue[length + 1];
 
+        Set<Integer> end = new HashSet<>(follow);
+        end.addAll(followSet(symbol));
 
-
-        follow.addAll(followSet(symbol));
+        // follow.addAll(followSet(symbol));
 
         for (int i = 0; i < length; i++) { // parse right-hand side symbols one by one
             int term = right.get(i);
+
             params[i + 1] = isNonTerminal(term)
-                    ? parse(term, follow)  // for non terminals: recursively parse it
+                    ? parse(term, end)  // for non terminals: recursively parse it
                     : matchToken(term) // for terminals: match token
                     ;
             //if (params[i + 1] == null)
