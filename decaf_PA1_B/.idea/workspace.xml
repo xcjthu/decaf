@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25d57de9-460c-4aca-a412-5b701dda0269" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestCases/S1-/output/guarded-error-2.result" beforeDir="false" afterPath="$PROJECT_DIR$/TestCases/S1-/output/guarded-error-2.result" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/bin/decaf/frontend/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/result/bin/decaf/frontend/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/decaf.jar" beforeDir="false" afterPath="$PROJECT_DIR$/result/decaf.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decaf/frontend/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/frontend/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decaf/frontend/Parser.spec" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/frontend/Parser.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decaf/frontend/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/frontend/Table.java" afterDir="false" />
-    </list>
+    <list default="true" id="25d57de9-460c-4aca-a412-5b701dda0269" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +13,7 @@
     <session id="52640279">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.15" value="1" />
@@ -89,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestCases/S1-/output/guarded-error-2.result">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-937">
-              <caret line="198" column="10" selection-start-line="198" selection-start-column="10" selection-end-line="198" selection-end-column="10" />
+            <state relative-caret-position="-90">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -236,7 +228,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540870226044" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540870277229" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -266,16 +258,15 @@
       <workItem from="1540352561768" duration="5812000" />
       <workItem from="1540470073311" duration="32163000" />
       <workItem from="1540793046716" duration="740000" />
-      <workItem from="1540861222174" duration="3688000" />
+      <workItem from="1540861222174" duration="3829000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45837000" />
+    <option name="totallyTimeSpent" value="45978000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19466881" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -293,11 +284,11 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2907489" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2907489" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.26284876" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info active="true" anchor="right" id="Ant Build" order="1" visible="true" weight="0.1453958" />
+      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.1453958" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -561,8 +552,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestCases/S1-/output/guarded-error-2.result">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-937">
-          <caret line="198" column="10" selection-start-line="198" selection-start-column="10" selection-end-line="198" selection-end-column="10" />
+        <state relative-caret-position="-90">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
