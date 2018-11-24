@@ -1,0 +1,11 @@
+class Main {
+    static void main(){
+        (true){
+
+        }
+        else{
+
+        }
+    }
+}
+
