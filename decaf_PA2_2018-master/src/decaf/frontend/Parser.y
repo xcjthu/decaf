@@ -253,7 +253,7 @@ LValue          :	Receiver IDENTIFIER
 
 VarDef          :   VAR IDENTIFIER
                     {
-                        $$.lvalue = new Tree.VarStmt($2.ident, $1.loc);
+                        $$.lvalue = new Tree.VarStmt($2.ident, $2.loc);
                     }
                 ;
 

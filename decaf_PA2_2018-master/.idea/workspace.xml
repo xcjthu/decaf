@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21d00700-530d-4208-8dbd-f0394b42a55a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../decaf_PA1_B/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../decaf_PA1_B/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../decaf_PA1_B/result/decaf.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../decaf_PA1_B/result/decaf.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../decaf_PA1_B/src/decaf/frontend/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/../decaf_PA1_B/src/decaf/frontend/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decaf/frontend/Parser.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/frontend/Parser.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decaf/symbol/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/symbol/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decaf/tree/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/tree/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decaf/type/BaseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/type/BaseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,30 +27,31 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="decaf" value="11" />
-          <entry key="java" value="37" />
+          <entry key="decaf" value="34" />
+          <entry key="java" value="58" />
           <entry key="py" value="2" />
-          <entry key="result" value="8" />
-          <entry key="y" value="1" />
+          <entry key="result" value="16" />
+          <entry key="y" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="37" />
-          <entry key="PLAIN_TEXT" value="22" />
+          <entry key="JAVA" value="58" />
+          <entry key="PLAIN_TEXT" value="54" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3501" />
+          <entry key="decaf" value="8" />
+          <entry key="java" value="7564" />
           <entry key="py" value="58" />
-          <entry key="y" value="1" />
+          <entry key="y" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3501" />
-          <entry key="PLAIN_TEXT" value="59" />
+          <entry key="JAVA" value="7564" />
+          <entry key="PLAIN_TEXT" value="68" />
         </counts>
       </usages-collector>
     </session>
@@ -57,15 +61,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="142" column="51" selection-start-line="142" selection-start-column="51" selection-end-line="142" selection-end-column="51" />
+            <state relative-caret-position="-6">
+              <caret line="255" column="26" selection-start-line="255" selection-start-column="20" selection-end-line="255" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#visitTopLevel#0;class#BuildSym#0" />
                 <element signature="method#visitClassDef#0;class#BuildSym#0" />
                 <element signature="method#visitVarDef#0;class#BuildSym#0" />
+                <element signature="method#visitAssign#0;class#BuildSym#0" />
                 <element signature="method#visitMethodDef#0;class#BuildSym#0" />
                 <element signature="method#visitTypeIdent#0;class#BuildSym#0" />
+                <element signature="method#visitTypeClass#0;class#BuildSym#0" />
+                <element signature="method#visitTypeArray#0;class#BuildSym#0" />
               </folding>
             </state>
           </provider>
@@ -74,84 +81,76 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="983">
-              <caret line="463" lean-forward="true" selection-start-line="463" selection-end-line="463" />
+            <state relative-caret-position="129">
+              <caret line="612" column="13" selection-start-line="612" selection-start-column="13" selection-end-line="612" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1611#1717#0" />
-                <element signature="e#1723#1853#0" />
-                <element signature="e#2006#2830#0" />
-                <element signature="e#2836#3242#0" />
-                <element signature="e#3621#4240#0" />
-                <element signature="e#4246#7216#0" />
-                <element signature="e#7222#8818#0" />
-                <element signature="e#8920#9775#0" />
-                <element signature="e#9781#10187#0" />
-                <element signature="e#10193#10575#0" />
-                <element signature="e#10581#11210#0" />
-                <element signature="e#11216#11791#0" />
-                <element signature="e#15297#15528#0" />
-                <element signature="e#15534#15756#0" />
-                <element signature="e#15762#15986#0" />
-                <element signature="e#15992#16195#0" />
-                <element signature="e#17063#17243#0" />
-                <element signature="e#17249#17677#0" />
-                <element signature="e#17683#17973#0" />
-                <element signature="e#17979#18497#0" />
-                <element signature="e#18503#19511#0" />
-                <element signature="e#19517#19785#0" />
-                <element signature="e#19791#20270#0" />
-                <element signature="e#20276#20651#0" />
-                <element signature="e#20657#21171#0" />
-                <element signature="e#22550#22700#0" />
-                <element signature="e#22706#22900#0" />
-                <element signature="e#23134#25351#0" />
+                <element signature="e#23295#23296#0" expanded="true" />
+                <element signature="e#23346#23347#0" expanded="true" />
+                <element signature="e#23359#24160#0" />
+                <element signature="e#27118#27119#0" expanded="true" />
+                <element signature="e#27170#27171#0" expanded="true" />
+                <element signature="e#26853#29331#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestCases/S2/q4-var-test1.decaf">
+        <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-1.decaf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+            <state relative-caret-position="255">
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/decaf/type/BaseType.java">
+        <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-3.decaf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+            <state relative-caret-position="270">
+              <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/decaf/type/Type.java">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-4.decaf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestCases/S2/q53-3.decaf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestCases/S2/q53-2.decaf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decaf/tree/Tree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20055">
-              <caret line="1491" column="31" selection-start-line="1491" selection-start-column="24" selection-end-line="1491" selection-end-column="31" />
+            <state relative-caret-position="265">
+              <caret line="1398" column="27" selection-start-line="1398" selection-start-column="27" selection-end-line="1398" selection-end-column="27" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#31879#33106#0" />
+                <element signature="e#13305#13306#0" expanded="true" />
+                <element signature="e#13347#13348#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/decaf/scope/ScopeStack.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
             </state>
           </provider>
         </entry>
@@ -159,8 +158,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decaf/frontend/Parser.y">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3270">
-              <caret line="218" column="26" selection-start-line="218" selection-start-column="20" selection-end-line="218" selection-end-column="26" />
+            <state relative-caret-position="69">
+              <caret line="453" column="11" selection-start-line="453" selection-end-line="453" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -169,36 +168,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Ident(</find>
-      <find>Ident</find>
-      <find>lookup</find>
-      <find>isclass</find>
-      <find>equal</find>
-      <find>BadArgCountError</find>
-      <find>BadArgTypeError</find>
-      <find>.type</find>
-      <find>ClassDef</find>
-      <find>ident</find>
-      <find>If</find>
-      <find>If</find>
-      <find>class If</find>
-      <find>Guard</find>
-      <find>stmt</find>
-      <find>Block</find>
-      <find>Stmt</find>
-      <find>class If</find>
-      <find>visitIf</find>
-      <find>new Class</find>
-      <find>visit</find>
-      <find>StmtBlock</find>
-      <find>Lvalue</find>
-      <find>Assign</find>
-      <find>vardef</find>
-      <find>type</find>
-      <find>Scopy</find>
-      <find>LValue</find>
-      <find>Varstmt</find>
       <find>VarStmt</find>
+      <find>doubleMod</find>
+      <find>visitAss</find>
+      <find>array</find>
+      <find>NewArray</find>
+      <find>array element type must be non-void known type</find>
+      <find>ArrayType</find>
+      <find>array index must be int type</find>
+      <find>but default has type</find>
+      <find>default</find>
+      <find>Variable</find>
+      <find>decalre</find>
+      <find>foreach</find>
+      <find>StmtBlock</find>
+      <find>Array Operation on non-array type</find>
+      <find>Array</find>
+      <find>incompatible</find>
+      <find>ArrayList</find>
+      <find>declare</find>
+      <find>type.com</find>
+      <find>.open</find>
+      <find>Type</find>
+      <find>Type</find>
+      <find>foreac</find>
+      <find>ForeachStmt</find>
+      <find>Foreach</find>
+      <find>Block</find>
+      <find>setType</find>
+      <find>Block</find>
+      <find>VisitScopy</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,11 +207,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/TestCases/S2/runAll.py" />
-        <option value="$PROJECT_DIR$/src/decaf/frontend/Parser.y" />
         <option value="$PROJECT_DIR$/src/decaf/symbol/Class.java" />
+        <option value="$PROJECT_DIR$/src/decaf/symbol/Variable.java" />
+        <option value="$PROJECT_DIR$/src/decaf/frontend/Parser.y" />
         <option value="$PROJECT_DIR$/src/decaf/type/BaseType.java" />
         <option value="$PROJECT_DIR$/src/decaf/tree/Tree.java" />
         <option value="$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java" />
+        <option value="$PROJECT_DIR$/TestCases/S2/q1-1.decaf" />
         <option value="$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java" />
       </list>
     </option>
@@ -260,7 +261,21 @@
               <item name="decaf_PA2_2018-master" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="decaf" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="decaf_PA2_2018-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="decaf_PA2_2018-master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="decaf" type="462c0819:PsiDirectoryNode" />
               <item name="symbol" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="decaf_PA2_2018-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="decaf_PA2_2018-master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="decaf" type="462c0819:PsiDirectoryNode" />
+              <item name="tree" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="decaf_PA2_2018-master" type="b2602c69:ProjectViewProjectNode" />
@@ -317,16 +332,15 @@
       <option name="presentableId" value="Default" />
       <updated>1542441042438</updated>
       <workItem from="1542441044002" duration="23084000" />
-      <workItem from="1543024903556" duration="417000" />
+      <workItem from="1543024903556" duration="18601000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23501000" />
+    <option name="totallyTimeSpent" value="41685000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17851374" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -344,9 +358,9 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31571218" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.43612334" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.31424376" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.31424376" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.10743134" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -381,56 +395,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/decaf/scope/Scope.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/scope/GlobalScope.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/output/arrayerror.result">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/output/q3-1.result">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/arrayerror.result">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/output/q2-sealed-test1.result">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/q2-sealed-test1.decaf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/runAll.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="37" column="70" selection-start-line="37" selection-start-column="70" selection-end-line="37" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/error/DecafError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/scope/ClassScope.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-569" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/type/ArrayType.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/error/BadScopySrcError.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/decaf/error/BadArgCountError.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -449,9 +413,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/decaf/error/BadArrElementError.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/error/BadArrIndexError.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/decaf/error/BadScopyArgError.java">
@@ -482,10 +443,224 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-1.decaf">
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q3-guarded-test1.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        <state relative-caret-position="105">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/type/Type.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q4-var-test1.result">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/output/q4-var-test1.result">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q4-var-test1.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q4-1.decaf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q4-1.result">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/NotArrayError.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q5-array-test1.decaf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/type/ArrayType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q51-1.result">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="68" selection-start-column="22" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q51-1.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q52-1.decaf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/BadArrIndexError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding>
+            <element signature="e#276#277#0" expanded="true" />
+            <element signature="e#320#321#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/BadDefError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q52-3.result">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q52-3.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q52-2.decaf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q53-1.result">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="48" lean-forward="true" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/BadArrOperArgError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="31" />
+          <folding>
+            <element signature="e#327#328#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q53-2.result">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/result/q53-3.result">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/IncompatBinOpError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/IncompatUnOpError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/scope/ScopeStack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q3-1.decaf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/symbol/Variable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q53-1.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/symbol/Symbol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-268" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q53-2.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/tree/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="1398" column="27" selection-start-line="1398" selection-start-column="27" selection-end-line="1398" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#13305#13306#0" expanded="true" />
+            <element signature="e#13347#13348#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/frontend/Parser.y">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="453" column="11" selection-start-line="453" selection-end-line="453" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="255" column="26" selection-start-line="255" selection-start-column="20" selection-end-line="255" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#visitTopLevel#0;class#BuildSym#0" />
+            <element signature="method#visitClassDef#0;class#BuildSym#0" />
+            <element signature="method#visitVarDef#0;class#BuildSym#0" />
+            <element signature="method#visitAssign#0;class#BuildSym#0" />
+            <element signature="method#visitMethodDef#0;class#BuildSym#0" />
+            <element signature="method#visitTypeIdent#0;class#BuildSym#0" />
+            <element signature="method#visitTypeClass#0;class#BuildSym#0" />
+            <element signature="method#visitTypeArray#0;class#BuildSym#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q53-3.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-4.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -496,110 +671,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/q3-1.decaf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/q3-guarded-test1.decaf">
+    <entry file="file://$PROJECT_DIR$/src/decaf/type/ClassType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/symbol/Variable.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="142" column="51" selection-start-line="142" selection-start-column="51" selection-end-line="142" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#visitTopLevel#0;class#BuildSym#0" />
-            <element signature="method#visitClassDef#0;class#BuildSym#0" />
-            <element signature="method#visitVarDef#0;class#BuildSym#0" />
-            <element signature="method#visitMethodDef#0;class#BuildSym#0" />
-            <element signature="method#visitTypeIdent#0;class#BuildSym#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestCases/S2/q4-var-test1.decaf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-        </state>
+        <state relative-caret-position="-1" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/decaf/type/BaseType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        <state relative-caret-position="274">
+          <caret line="22" column="68" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/type/Type.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/tree/Tree.java">
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-3.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20055">
-          <caret line="1491" column="31" selection-start-line="1491" selection-start-column="24" selection-end-line="1491" selection-end-column="31" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#31879#33106#0" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/scope/ScopeStack.java">
+    <entry file="file://$PROJECT_DIR$/TestCases/S2/q1-1.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/frontend/Parser.y">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3270">
-          <caret line="218" column="26" selection-start-line="218" selection-start-column="20" selection-end-line="218" selection-end-column="26" />
+        <state relative-caret-position="255">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="983">
-          <caret line="463" lean-forward="true" selection-start-line="463" selection-end-line="463" />
+        <state relative-caret-position="129">
+          <caret line="612" column="13" selection-start-line="612" selection-start-column="13" selection-end-line="612" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1611#1717#0" />
-            <element signature="e#1723#1853#0" />
-            <element signature="e#2006#2830#0" />
-            <element signature="e#2836#3242#0" />
-            <element signature="e#3621#4240#0" />
-            <element signature="e#4246#7216#0" />
-            <element signature="e#7222#8818#0" />
-            <element signature="e#8920#9775#0" />
-            <element signature="e#9781#10187#0" />
-            <element signature="e#10193#10575#0" />
-            <element signature="e#10581#11210#0" />
-            <element signature="e#11216#11791#0" />
-            <element signature="e#15297#15528#0" />
-            <element signature="e#15534#15756#0" />
-            <element signature="e#15762#15986#0" />
-            <element signature="e#15992#16195#0" />
-            <element signature="e#17063#17243#0" />
-            <element signature="e#17249#17677#0" />
-            <element signature="e#17683#17973#0" />
-            <element signature="e#17979#18497#0" />
-            <element signature="e#18503#19511#0" />
-            <element signature="e#19517#19785#0" />
-            <element signature="e#19791#20270#0" />
-            <element signature="e#20276#20651#0" />
-            <element signature="e#20657#21171#0" />
-            <element signature="e#22550#22700#0" />
-            <element signature="e#22706#22900#0" />
-            <element signature="e#23134#25351#0" />
+            <element signature="e#23295#23296#0" expanded="true" />
+            <element signature="e#23346#23347#0" expanded="true" />
+            <element signature="e#23359#24160#0" />
+            <element signature="e#27118#27119#0" expanded="true" />
+            <element signature="e#27170#27171#0" expanded="true" />
+            <element signature="e#26853#29331#0" />
           </folding>
         </state>
       </provider>

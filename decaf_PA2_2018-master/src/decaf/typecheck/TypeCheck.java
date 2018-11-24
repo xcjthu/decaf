@@ -34,6 +34,9 @@ import decaf.error.UndeclVarError;
 
 import decaf.error.BadScopyArgError;
 import decaf.error.BadScopySrcError;
+import decaf.error.BadArrOperArgError;
+import decaf.error.BadArrIndexError;
+import decaf.error.BadDefError;
 
 import decaf.frontend.Parser;
 import decaf.scope.ClassScope;
@@ -445,6 +448,11 @@ public class TypeCheck extends Tree.Visitor {
 
         assign.left.accept(this);
         assign.expr.accept(this);
+        if(assign.left.type == BaseType.VARUNDEFINE){
+            Symbol symbol = table.lookup(((Tree.VarStmt)(assign.left)).name, false);
+            ((Variable)symbol).setType(assign.expr.type);
+            return;
+        }
         //if (assign.left instanceof Tree.VarStmt){
         //    Symbol s = ((Tree.VarStmt)assign.left).symbol;
         //    s.type = assign.expr.type;
@@ -598,22 +606,21 @@ public class TypeCheck extends Tree.Visitor {
 
         }*/
         scopy.ident.accept(this);
-        if (scopy.ident.type != BaseType.ERROR) {
-            if (!scopy.ident.type.isClassType()) {
+        scopy.expr.accept(this);
+        if (!scopy.ident.type.isClassType()) {
+            if (! scopy.ident.type.equal(BaseType.ERROR)) {
                 issueError(new BadScopyArgError(scopy.getLocation(), "dst", scopy.ident.type.toString()));
                 scopy.type = BaseType.ERROR;
             }
-        }
-        scopy.expr.accept(this);
-        /*
-        if (scopy.expr.type != BaseType.ERROR) {
+
+            //if (scopy.expr.type != BaseType.ERROR) {
             if (!scopy.expr.type.isClassType()) {
                 issueError(new BadScopyArgError(scopy.getLocation(), "src", scopy.expr.type.toString()));
                 scopy.type = BaseType.ERROR;
             }
-        }
-        */
-        if (scopy.type != BaseType.ERROR
+            //}
+
+        }else if (scopy.type != BaseType.ERROR
                 && scopy.ident.type != BaseType.ERROR
                 && scopy.expr.type != BaseType.ERROR
                 && !scopy.expr.type.equal(scopy.ident.type)) {
@@ -639,11 +646,91 @@ public class TypeCheck extends Tree.Visitor {
         }
     }
 
-    //@Override
-    //public void visitVarStmt(Tree.VarStmt varStmt){
-    //    varStmt.type = BastType.VARUNDEFINE;
-    //}
+    @Override
+    public void visitVarStmt(Tree.VarStmt varStmt){
+        varStmt.type = BaseType.VARUNDEFINE;
+    }
 
+    @Override
+    public void visitArrayConstDoubleMod(Tree.ArrayConstDoubleMod arrayConstDoubleMod){
+        arrayConstDoubleMod.expr1.accept(this);
+        arrayConstDoubleMod.expr2.accept(this);
+        if (arrayConstDoubleMod.expr1.type.equal(BaseType.VARUNDEFINE) || arrayConstDoubleMod.expr1.type.equal(BaseType.VOID)){
+            issueError(new BadArrElementError(arrayConstDoubleMod.expr1.getLocation()));
+            arrayConstDoubleMod.type = BaseType.ERROR;
+        }else
+        if (! arrayConstDoubleMod.expr2.type.equal(BaseType.INT)){
+            issueError(new BadArrElementError(arrayConstDoubleMod.getLocation()));
+            arrayConstDoubleMod.type = BaseType.ERROR;
+        }else{
+            arrayConstDoubleMod.type = new ArrayType(arrayConstDoubleMod.expr1.type);
+        }
+    }
+
+    @Override
+    public void visitArrayDefault(Tree.ArrayDefault arrayDefault){
+        arrayDefault.expr1.accept(this);
+        arrayDefault.expr2.accept(this);
+        arrayDefault.expr3.accept(this);
+
+        if (!arrayDefault.expr1.type.isArrayType()){
+            issueError(new BadArrOperArgError(arrayDefault.getLocation()));
+            if (!(arrayDefault.expr3.type.equal(BaseType.VARUNDEFINE) || arrayDefault.expr3.type.equal(BaseType.VOID))){
+                arrayDefault.type = arrayDefault.expr3.type;
+            }else{
+                arrayDefault.type = BaseType.ERROR;
+            }
+        }else if (! arrayDefault.expr2.type.equal(BaseType.INT)){
+            issueError(new BadArrIndexError(arrayDefault.expr2.getLocation()));
+            arrayDefault.type = ((ArrayType)arrayDefault.expr1.type).getElementType();
+
+        }else if (!arrayDefault.expr3.type.equal(((ArrayType)arrayDefault.expr1.type).getElementType()) || arrayDefault.expr3.type.equal(BaseType.VARUNDEFINE) || arrayDefault.expr3.type.equal(BaseType.VOID)){
+            issueError(new BadDefError(arrayDefault.getLocation(), ((ArrayType)arrayDefault.expr1.type).getElementType().toString(), arrayDefault.expr3.type.toString()));
+            arrayDefault.type = ((ArrayType)arrayDefault.expr1.type).getElementType();
+
+        } else{
+            arrayDefault.type = ((ArrayType)arrayDefault.expr1.type).getElementType();
+        }
+    }
+
+    @Override
+    public void visitForeachStmt(Tree.ForeachStmt foreachStmt){
+        table.open(foreachStmt.block.associatedScope);
+
+        if (! (foreachStmt.typel == null))
+            foreachStmt.typel.accept(this);
+        foreachStmt.inExpr.accept(this);
+        // foreachStmt.whileExpr.accept(this);
+        // foreachStmt.foreachBody.accept(this);
+
+        Symbol xsym = table.lookup(foreachStmt.identname, false);
+        // System.out.println(xsym.getType().toString());
+        if (! foreachStmt.inExpr.type.equal(BaseType.ERROR)) {
+            if (!foreachStmt.inExpr.type.isArrayType()) {
+                issueError(new BadArrOperArgError(foreachStmt.inExpr.getLocation()));
+
+            } else {
+                if (xsym.getType().equal(BaseType.VARUNDEFINE)) {
+                    // System.out.println("var set type");
+                    ((Variable) xsym).setType(((ArrayType) foreachStmt.inExpr.type).getElementType());
+
+                } else if (!xsym.getType().compatible(((ArrayType) foreachStmt.inExpr.type).getElementType())) {
+                    //issueError();
+                }
+
+                checkTestExpr(foreachStmt.whileExpr);
+                if (foreachStmt.foreachBody.tag == Tree.BLOCK) {
+                    for (Tree s : ((Tree.Block) foreachStmt.foreachBody).block)
+                        s.accept(this);
+                } else {
+                    foreachStmt.accept(this);
+                }
+            }
+        }
+
+        table.close();
+
+    }
 
     private void issueError(DecafError error) {
         Driver.getDriver().issueError(error);
@@ -652,6 +739,11 @@ public class TypeCheck extends Tree.Visitor {
     private Type checkBinaryOp(Tree.Expr left, Tree.Expr right, int op, Location location) {
         left.accept(this);
         right.accept(this);
+
+        if (left.type.equal(BaseType.VARUNDEFINE) || right.type.equal(BaseType.VARUNDEFINE)){
+            issueError(new IncompatBinOpError(location, left.type.toString(), Parser.opStr(op), right.type.toString()));
+            return BaseType.ERROR;
+        }
 
         if (left.type.equal(BaseType.ERROR) || right.type.equal(BaseType.ERROR)) {
             switch (op) {

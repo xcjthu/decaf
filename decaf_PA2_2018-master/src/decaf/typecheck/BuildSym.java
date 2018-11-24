@@ -1,6 +1,7 @@
 package decaf.typecheck;
 
 import java.util.Iterator;
+import java.util.ArrayList;
 
 import decaf.Driver;
 import decaf.tree.Tree;
@@ -246,6 +247,36 @@ public class BuildSym extends Tree.Visitor {
         table.open(block.associatedScope);
         for (Tree s : block.block) {
             s.accept(this);
+        }
+        table.close();
+    }
+
+    @Override
+    public void visitForeachStmt(Tree.ForeachStmt foreachStmt){
+        foreachStmt.block = new Tree.Block(new ArrayList<Tree>(), foreachStmt.getLocation());
+        // foreachStmt.associateScope = new LocalScope(new Tree.Block(new ArrayList<Tree>(), foreachStmt.getLocation()));
+        foreachStmt.block.associatedScope = new LocalScope(foreachStmt.block);
+
+        table.open(foreachStmt.block.associatedScope);
+
+        Variable v;
+        if (foreachStmt.typel == null) {
+            v = new Variable(foreachStmt.identname, BaseType.VARUNDEFINE, foreachStmt.getLocation());
+
+        }else {
+            foreachStmt.typel.accept(this);
+            v = new Variable(foreachStmt.identname, foreachStmt.typel.type, foreachStmt.getLocation());
+        }
+        table.declare(v);
+
+        foreachStmt.inExpr.accept(this);
+        foreachStmt.whileExpr.accept(this);
+        if (foreachStmt.foreachBody.tag == Tree.BLOCK){
+            for (Tree s: ((Tree.Block)foreachStmt.foreachBody).block){
+                s.accept(this);
+            }
+        }else{
+            foreachStmt.foreachBody.accept(this);
         }
         table.close();
     }

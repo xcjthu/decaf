@@ -21,6 +21,10 @@ public class Variable extends Symbol {
 		this.location = location;
 	}
 
+	public void setType(Type type){
+	    this.type = type;
+    }
+
 	public boolean isLocalVar() {
 		return definedIn.isLocalScope();
 	}

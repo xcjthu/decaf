@@ -1391,15 +1391,19 @@ public abstract class Tree {
      */
     public static class ForeachStmt extends Tree{
         public String identname;
-        public TypeLiteral type;
+        public TypeLiteral typel;
         public Expr inExpr;
         public Expr whileExpr;
         public Tree foreachBody;
 
+        public Block block;
+
+        //public LocalScope associatedScope;
+
         public ForeachStmt(TypeLiteral type, String name, Expr inExpr, Expr whileExpr, Tree foreachBody, Location loc){
             super(FOREACHSTMT, loc);
 
-            this.type = type;
+            this.typel = type;
             this.identname = name;
             this.inExpr = inExpr;
             this.whileExpr = whileExpr;
@@ -1415,11 +1419,11 @@ public abstract class Tree {
         public void printTo(IndentPrintWriter pw){
             pw.println("foreach");
             pw.incIndent();
-            if (type == null)
+            if (typel == null)
                 pw.println("varbind " + identname + " var");
             else {
                 pw.print("varbind " + identname + " ");
-                type.printTo(pw);
+                typel.printTo(pw);
                 pw.println();
             }
             inExpr.printTo(pw);
@@ -1537,8 +1541,8 @@ public abstract class Tree {
     }
 
     public static class ArrayConstDoubleMod extends Expr{
-        Expr expr1;
-        Expr expr2;
+        public Expr expr1;
+        public Expr expr2;
         public ArrayConstDoubleMod(Expr expr1, Expr expr2, Location loc){
             super(ARRAYCONSTDOUBLEMOD, loc);
             this.expr1 = expr1;
@@ -1616,9 +1620,9 @@ public abstract class Tree {
     }
 
     public static class ArrayDefault extends Expr{
-        Expr expr1;
-        Expr expr2;
-        Expr expr3;
+        public Expr expr1;
+        public Expr expr2;
+        public Expr expr3;
 
         public ArrayDefault(Expr expr1, Expr expr2, Expr expr3, Location loc){
             super(ARRAYDEFAULT, loc);
