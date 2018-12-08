@@ -1,0 +1,7 @@
+testing division by 0 runtime error2
+vm crash at (25,16), tac = _T7 = (_T5 % _T6)
+Caused by:
+java.lang.ArithmeticException: / by zero
+	at decaf.tacvm.exec.Executor.exec(Unknown Source)
+	at decaf.tacvm.TacVM.run(Unknown Source)
+	at decaf.tacvm.TacVM.main(Unknown Source)
