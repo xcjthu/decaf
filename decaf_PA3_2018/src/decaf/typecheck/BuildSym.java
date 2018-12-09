@@ -128,7 +128,8 @@ public class BuildSym extends Tree.Visitor {
             if (table.getCurrentScope().equals(sym.getScope())) {
                 issueError(new DeclConflictError(v.getLocation(), v.getName(),
                         sym.getLocation()));
-            } else if ((sym.getScope().isFormalScope() && table.getCurrentScope().isLocalScope() && ((LocalScope)table.getCurrentScope()).isCombinedtoFormal() )) {
+            } else if ((sym.getScope().isFormalScope() || sym.getScope()
+                    .isLocalScope())) {
                 issueError(new DeclConflictError(v.getLocation(), v.getName(),
                         sym.getLocation()));
             } else {
@@ -148,7 +149,8 @@ public class BuildSym extends Tree.Visitor {
             if (table.getCurrentScope().equals(sym.getScope())) {
                 issueError(new DeclConflictError(v.getLocation(), v.getName(),
                         sym.getLocation()));
-            } else if ((sym.getScope().isFormalScope() && table.getCurrentScope().isLocalScope() && ((LocalScope) table.getCurrentScope()).isCombinedtoFormal())) {
+            } else if ((sym.getScope().isFormalScope() || sym.getScope()
+                    .isLocalScope())) {
                 issueError(new DeclConflictError(v.getLocation(), v.getName(),
                         sym.getLocation()));
             } else {
@@ -185,14 +187,7 @@ public class BuildSym extends Tree.Visitor {
             d.accept(this);
             f.appendParam(d.symbol);
         }
-
-        funcDef.body.associatedScope = new LocalScope(funcDef.body);
-        funcDef.body.associatedScope.setCombinedtoFormal(true);
-        table.open(funcDef.body.associatedScope);
-        for (Tree s : funcDef.body.block) {
-            s.accept(this);
-        }
-        table.close();
+        funcDef.body.accept(this);
         table.close();
     }
 

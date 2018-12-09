@@ -268,7 +268,7 @@ _DenseMatrix.Init:
     _T123 = 0
     _T124 = (_T122 < _T123)
     if (_T124 == 0) branch _L39
-    _T125 = "Decaf runtime error: Cannot create negative-sized array\n"
+    _T125 = "Decaf runtime error: The length of the created array should not be less than 0.\n"
     parm _T125
     call _PrintString
     call _Halt
@@ -314,7 +314,7 @@ _L45:
     _T144 = 0
     _T145 = (_T143 < _T144)
     if (_T145 == 0) branch _L46
-    _T146 = "Decaf runtime error: Cannot create negative-sized array\n"
+    _T146 = "Decaf runtime error: The length of the created array should not be less than 0.\n"
     parm _T146
     call _PrintString
     call _Halt
@@ -535,7 +535,7 @@ _SparseMatrix.Init:
     _T242 = 0
     _T243 = (_T241 < _T242)
     if (_T243 == 0) branch _L65
-    _T244 = "Decaf runtime error: Cannot create negative-sized array\n"
+    _T244 = "Decaf runtime error: The length of the created array should not be less than 0.\n"
     parm _T244
     call _PrintString
     call _Halt

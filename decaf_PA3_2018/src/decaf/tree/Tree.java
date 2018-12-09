@@ -798,19 +798,19 @@ public abstract class Tree {
 
     	@Override
     	public void printTo(IndentPrintWriter pw) {
-    		pw.println("call " + method);
-    		pw.incIndent();
-    		if (receiver != null) {
-    			receiver.printTo(pw);
-    		} else {
-    			pw.println("<empty>");
-    		}
-    		
-    		for (Expr e : actuals) {
-    			e.printTo(pw);
-    		}
-    		pw.decIndent();
-    	}
+            pw.println("call " + method);
+            pw.incIndent();
+            if (receiver != null) {
+                receiver.printTo(pw);
+            } else {
+                pw.println("<empty>");
+            }
+
+            for (Expr e : actuals) {
+                e.printTo(pw);
+            }
+            pw.decIndent();
+        }
     }
 
     /**
@@ -1514,7 +1514,8 @@ public abstract class Tree {
      */
     public static class VarStmt extends LValue{
         public String name;
-        public Symbol symbol;
+        public Variable symbol;
+
         public VarStmt(String name, Location loc){
             super(VARSTMT, loc);
             this.name = name;

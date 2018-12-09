@@ -21,7 +21,7 @@ main:
     _T5 = 0
     _T6 = (_T4 < _T5)
     if (_T6 == 0) branch _L10
-    _T7 = "Decaf runtime error: Cannot create negative-sized array\n"
+    _T7 = "Decaf runtime error: The length of the created array should not be less than 0.\n"
     parm _T7
     call _PrintString
     call _Halt

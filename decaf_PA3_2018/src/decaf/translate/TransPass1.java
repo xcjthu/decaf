@@ -26,6 +26,7 @@ public class TransPass1 extends Tree.Visitor {
 
 	@Override
 	public void visitTopLevel(Tree.TopLevel program) {
+
 		for (Tree.ClassDef cd : program.classes) {
 			cd.accept(this);
 		}
@@ -93,10 +94,12 @@ public class TransPass1 extends Tree.Visitor {
 			vd.symbol.setTemp(t);
 			vd.symbol.setOffset(oc.next(vd.symbol.getTemp().size));
 		}
+        //funcDef.body.accept(this);
 	}
 
 	@Override
 	public void visitVarDef(Tree.VarDef varDef) {
+        // System.out.println("visit var def " + varDef.name);
 		vars.add(varDef.symbol);
 		objectSize += OffsetCounter.WORD_SIZE;
 	}

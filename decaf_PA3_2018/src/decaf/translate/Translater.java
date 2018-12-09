@@ -123,7 +123,7 @@ public class Translater {
 		}
 	}
 
-	public void createVTable(Class c) {
+	public void createVTable(Class c) { // 读代码看应该是在创建虚函数表
 		if (c.getVtable() != null) {
 			return;
 		}

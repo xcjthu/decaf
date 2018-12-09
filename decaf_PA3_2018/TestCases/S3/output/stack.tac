@@ -45,7 +45,7 @@ _Stack.Init:
     _T14 = 0
     _T15 = (_T13 < _T14)
     if (_T15 == 0) branch _L16
-    _T16 = "Decaf runtime error: Cannot create negative-sized array\n"
+    _T16 = "Decaf runtime error: The length of the created array should not be less than 0.\n"
     parm _T16
     call _PrintString
     call _Halt

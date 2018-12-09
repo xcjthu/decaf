@@ -73,9 +73,10 @@ public class Class extends Symbol {
 		this.numVar = numVar;
 	}
 
-	public Class(String name, String parentName, Location location) {
+	public Class(boolean sealed, String name, String parentName, Location location) {
 		this.name = name;
 		this.parentName = parentName;
+		this.sealed = sealed;
 		this.location = location;
 		this.order = -1;
 		this.check = false;

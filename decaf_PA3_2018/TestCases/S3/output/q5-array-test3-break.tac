@@ -1,1 +1,1 @@
-*** Error at (16,9): syntax error
+*** Error at (23,5): 'break' is only allowed inside a loop

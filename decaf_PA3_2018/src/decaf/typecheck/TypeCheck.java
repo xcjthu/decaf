@@ -638,6 +638,17 @@ public class TypeCheck extends Tree.Visitor {
     @Override
     public void visitVarStmt(Tree.VarStmt varStmt){
         varStmt.type = BaseType.VARUNDEFINE;
+
+        /*
+        if (currentFunction.isStatik()) {
+            issueError(new RefNonStaticError(varStmt.getLocation(),
+                    currentFunction.getName(), varStmt.name));
+        } else {
+            varStmt.owner = new Tree.ThisExpr(varStmt.getLocation());
+            varStmt.owner.accept(this);
+        }
+        */
+        varStmt.lvKind = Tree.LValue.Kind.MEMBER_VAR;
     }
 
     @Override

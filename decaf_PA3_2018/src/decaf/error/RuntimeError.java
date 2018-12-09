@@ -10,7 +10,8 @@ public final class RuntimeError {
 
 	public static final String ARRAY_INDEX_OUT_OF_BOUND = "Decaf runtime error: Array subscript out of bounds\n";
 
-	public static final String NEGATIVE_ARR_SIZE = "Decaf runtime error: Cannot create negative-sized array\n";
+	//public static final String NEGATIVE_ARR_SIZE = "Decaf runtime error: Cannot create negative-sized array\n";
+	public static final String NEGATIVE_ARR_SIZE = "Decaf runtime error: The length of the created array should not be less than 0.\n";
 	
 	public static final String CLASS_CAST_ERROR1 = "Decaf runtime error: ";
 	

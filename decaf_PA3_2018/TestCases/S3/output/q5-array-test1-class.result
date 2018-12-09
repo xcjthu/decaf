@@ -1,0 +1,7 @@
+decaf.tacvm.exec.ExecuteException: memory access base = 28 offset = 8 out of bounds
+	at decaf.tacvm.exec.Memory.checkHeapAccess(Unknown Source)
+	at decaf.tacvm.exec.Memory.store(Unknown Source)
+	at decaf.tacvm.exec.Executor.exec(Unknown Source)
+	at decaf.tacvm.TacVM.run(Unknown Source)
+	at decaf.tacvm.TacVM.main(Unknown Source)
+***Error at (106,17), tac = *(_T36 + 8) = _T14: memory access base = 28 offset = 8 out of bounds
