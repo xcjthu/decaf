@@ -52,19 +52,19 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="decaf" value="59" />
-          <entry key="java" value="2495" />
+          <entry key="java" value="2796" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2495" />
+          <entry key="JAVA" value="2796" />
           <entry key="PLAIN_TEXT" value="59" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="decaf" value="13" />
-          <entry key="java" value="24" />
+          <entry key="java" value="26" />
           <entry key="result" value="19" />
           <entry key="tac" value="8" />
           <entry key="y" value="1" />
@@ -72,7 +72,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="24" />
+          <entry key="JAVA" value="26" />
           <entry key="PLAIN_TEXT" value="41" />
         </counts>
       </usages-collector>
@@ -90,15 +90,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/decaf/translate/Translater.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="346" column="34" selection-start-line="346" selection-start-column="16" selection-end-line="346" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decaf/translate/TransPass1.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="687">
@@ -107,11 +98,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/decaf/translate/Translater.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="375" column="8" selection-start-line="375" selection-start-column="8" selection-end-line="375" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/decaf/translate/TransPass2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="460" column="4" lean-forward="true" selection-start-line="460" selection-start-column="4" selection-end-line="460" selection-end-column="4" />
+            <state relative-caret-position="537">
+              <caret line="524" column="11" selection-start-line="524" selection-start-column="11" selection-end-line="524" selection-end-column="11" />
               <folding>
                 <element signature="method#visitBinary#0;class#TransPass2#0" />
                 <element signature="method#genEquNeq#0;class#TransPass2#0" />
@@ -130,16 +130,17 @@
                 <element signature="method#visitIdent#0;class#TransPass2#0" />
                 <element signature="e#6409#6410#0" expanded="true" />
                 <element signature="e#6446#6447#0" expanded="true" />
-                <element signature="method#visitCallExpr#0;class#TransPass2#0" />
-                <element signature="method#visitForLoop#0;class#TransPass2#0" />
                 <element signature="method#visitIf#0;class#TransPass2#0" />
                 <element signature="method#visitNewArray#0;class#TransPass2#0" />
                 <element signature="method#visitNewClass#0;class#TransPass2#0" />
                 <element signature="method#visitWhileLoop#0;class#TransPass2#0" />
                 <element signature="method#visitTypeTest#0;class#TransPass2#0" />
+                <element signature="method#visitTypeCast#0;class#TransPass2#0" />
+                <element signature="method#visitScopy#0;class#TransPass2#0" />
                 <element signature="method#visitGuard#0;class#TransPass2#0" />
                 <element signature="e#10485#10486#0" expanded="true" />
                 <element signature="e#10537#10538#0" expanded="true" />
+                <element signature="method#visitArrayConstDoubleMod#0;class#TransPass2#0" />
                 <element signature="method#visitArrayDefault#0;class#TransPass2#0" />
               </folding>
             </state>
@@ -147,19 +148,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestCases/S3/output/q5-array-test1-class.result">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/decaf/tree/Tree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="1641" column="36" selection-start-line="1641" selection-start-column="24" selection-end-line="1641" selection-end-column="36" />
+            <state relative-caret-position="205">
+              <caret line="1418" column="31" selection-start-line="1418" selection-start-column="31" selection-end-line="1418" selection-end-column="31" />
               <folding>
                 <element signature="e#28478#29290#0" />
                 <element signature="e#29296#29612#0" />
@@ -168,9 +160,31 @@
                 <element signature="e#30583#30989#0" />
                 <element signature="e#30995#31517#0" />
                 <element signature="e#31526#32207#0" />
-                <element signature="e#32213#33519#0" />
                 <element signature="e#33526#34199#0" />
                 <element signature="e#34206#34830#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="429">
+              <caret line="266" selection-start-line="266" selection-end-line="266" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="354">
+              <caret line="711" column="65" selection-start-line="711" selection-start-column="65" selection-end-line="711" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#27168#27169#0" expanded="true" />
+                <element signature="e#27220#27221#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,9 +203,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>vars</find>
-      <find>lvalue</find>
-      <find>LValue</find>
       <find>objectSize</find>
       <find>Temp</find>
       <find>VarSt</find>
@@ -214,11 +225,14 @@
       <find>genNew</find>
       <find>genLoadStrConst</find>
       <find>RuntimeError</find>
-      <find>Arraydefault</find>
-      <find>out</find>
       <find>visitType</find>
-      <find>gennew</find>
       <find>genCheckArrayIndex</find>
+      <find>foreachStmt</find>
+      <find>Arraydefault</find>
+      <find>foreach</find>
+      <find>out</find>
+      <find>symbol</find>
+      <find>gennew</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -230,16 +244,16 @@
         <option value="$PROJECT_DIR$/src/decaf/translate/Translater.java" />
         <option value="$PROJECT_DIR$/src/decaf/symbol/Class.java" />
         <option value="$PROJECT_DIR$/src/decaf/type/BaseType.java" />
-        <option value="$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java" />
         <option value="$PROJECT_DIR$/src/decaf/tac/Temp.java" />
         <option value="$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java" />
-        <option value="$PROJECT_DIR$/src/decaf/tree/Tree.java" />
         <option value="$PROJECT_DIR$/src/decaf/tac/Tac.java" />
         <option value="$PROJECT_DIR$/src/decaf/translate/TransPass1.java" />
         <option value="$PROJECT_DIR$/src/decaf/error/RuntimeError.java" />
         <option value="$PROJECT_DIR$/TestCases/S3/q5-array-test1-int.decaf" />
         <option value="$PROJECT_DIR$/TestCases/S3/q5-array-test1-class.decaf" />
         <option value="$PROJECT_DIR$/TestCases/S3/q5-array-test2-default.decaf" />
+        <option value="$PROJECT_DIR$/src/decaf/tree/Tree.java" />
+        <option value="$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java" />
         <option value="$PROJECT_DIR$/src/decaf/translate/TransPass2.java" />
       </list>
     </option>
@@ -250,7 +264,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="22" />
     <option name="width" value="1280" />
     <option name="height" value="774" />
@@ -358,7 +372,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544328186753" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544333238390" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -387,15 +401,15 @@
       <option name="presentableId" value="Default" />
       <updated>1543651245339</updated>
       <workItem from="1543651246839" duration="3952000" />
-      <workItem from="1544234118922" duration="28014000" />
+      <workItem from="1544234118922" duration="32064000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31966000" />
+    <option name="totallyTimeSpent" value="36016000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
+    <frame x="-7" y="-7" width="2062" height="1126" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18163672" />
@@ -538,24 +552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="305" column="24" selection-start-line="305" selection-start-column="21" selection-end-line="305" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="27" />
-          <folding>
-            <element signature="e#27168#27169#0" expanded="true" />
-            <element signature="e#27220#27221#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestCases/S3/q4-var-test1.decaf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -617,13 +613,6 @@
     <entry file="file://$PROJECT_DIR$/TestCases/S3/output/q5-array-test1-error.result">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/error/RuntimeError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="133" selection-start-line="13" selection-start-column="133" selection-end-line="13" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestCases/S3/result/q5-array-test1-int.result">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -641,39 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/tree/Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="1641" column="36" selection-start-line="1641" selection-start-column="24" selection-end-line="1641" selection-end-column="36" />
-          <folding>
-            <element signature="e#28478#29290#0" />
-            <element signature="e#29296#29612#0" />
-            <element signature="e#29618#29792#0" />
-            <element signature="e#29802#30577#0" />
-            <element signature="e#30583#30989#0" />
-            <element signature="e#30995#31517#0" />
-            <element signature="e#31526#32207#0" />
-            <element signature="e#32213#33519#0" />
-            <element signature="e#33526#34199#0" />
-            <element signature="e#34206#34830#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/translate/TransPass1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="687">
-          <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/decaf/translate/Translater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="346" column="34" selection-start-line="346" selection-start-column="16" selection-end-line="346" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -698,14 +654,72 @@
     <entry file="file://$PROJECT_DIR$/TestCases/S3/output/q5-array-test1-class.result">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
-          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/TypeCheck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="711" column="65" selection-start-line="711" selection-start-column="65" selection-end-line="711" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#27168#27169#0" expanded="true" />
+            <element signature="e#27220#27221#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/tree/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="1418" column="31" selection-start-line="1418" selection-start-column="31" selection-end-line="1418" selection-end-column="31" />
+          <folding>
+            <element signature="e#28478#29290#0" />
+            <element signature="e#29296#29612#0" />
+            <element signature="e#29618#29792#0" />
+            <element signature="e#29802#30577#0" />
+            <element signature="e#30583#30989#0" />
+            <element signature="e#30995#31517#0" />
+            <element signature="e#31526#32207#0" />
+            <element signature="e#33526#34199#0" />
+            <element signature="e#34206#34830#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/typecheck/BuildSym.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="266" selection-start-line="266" selection-end-line="266" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/error/RuntimeError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="133" selection-start-line="13" selection-start-column="133" selection-end-line="13" selection-end-column="133" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/translate/TransPass1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="687">
+          <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/decaf/translate/Translater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="375" column="8" selection-start-line="375" selection-start-column="8" selection-end-line="375" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/decaf/translate/TransPass2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="460" column="4" lean-forward="true" selection-start-line="460" selection-start-column="4" selection-end-line="460" selection-end-column="4" />
+        <state relative-caret-position="537">
+          <caret line="524" column="11" selection-start-line="524" selection-start-column="11" selection-end-line="524" selection-end-column="11" />
           <folding>
             <element signature="method#visitBinary#0;class#TransPass2#0" />
             <element signature="method#genEquNeq#0;class#TransPass2#0" />
@@ -724,16 +738,17 @@
             <element signature="method#visitIdent#0;class#TransPass2#0" />
             <element signature="e#6409#6410#0" expanded="true" />
             <element signature="e#6446#6447#0" expanded="true" />
-            <element signature="method#visitCallExpr#0;class#TransPass2#0" />
-            <element signature="method#visitForLoop#0;class#TransPass2#0" />
             <element signature="method#visitIf#0;class#TransPass2#0" />
             <element signature="method#visitNewArray#0;class#TransPass2#0" />
             <element signature="method#visitNewClass#0;class#TransPass2#0" />
             <element signature="method#visitWhileLoop#0;class#TransPass2#0" />
             <element signature="method#visitTypeTest#0;class#TransPass2#0" />
+            <element signature="method#visitTypeCast#0;class#TransPass2#0" />
+            <element signature="method#visitScopy#0;class#TransPass2#0" />
             <element signature="method#visitGuard#0;class#TransPass2#0" />
             <element signature="e#10485#10486#0" expanded="true" />
             <element signature="e#10537#10538#0" expanded="true" />
+            <element signature="method#visitArrayConstDoubleMod#0;class#TransPass2#0" />
             <element signature="method#visitArrayDefault#0;class#TransPass2#0" />
           </folding>
         </state>

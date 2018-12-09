@@ -263,6 +263,7 @@ public class BuildSym extends Tree.Visitor {
             v = new Variable(foreachStmt.identname, foreachStmt.typel.type, foreachStmt.typel.getLocation());
         }
         table.declare(v);
+        foreachStmt.symbol = v;
 
         foreachStmt.inExpr.accept(this);
         foreachStmt.whileExpr.accept(this);

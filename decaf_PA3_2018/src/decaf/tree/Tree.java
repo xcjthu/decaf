@@ -1416,6 +1416,7 @@ public abstract class Tree {
         public Tree foreachBody;
 
         public Block block;
+        public Variable symbol;
 
         //public LocalScope associatedScope;
 

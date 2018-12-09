@@ -510,4 +510,36 @@ public class TransPass2 extends Tree.Visitor {
         arrayDefault.val = tttmp;
 
     }
+
+    @Override
+    public void visitForeachStmt(Tree.ForeachStmt foreachStmt){
+        if (foreachStmt.typel != null)
+            foreachStmt.typel.accept(this);
+        Temp tvar = Temp.createTempI4();
+        tvar.sym = foreachStmt.symbol;
+        foreachStmt.symbol.setTemp(tvar);
+        foreachStmt.inExpr.accept(this);
+
+        Temp obj = tr.genLoad(foreachStmt.inExpr.val, -OffsetCounter.WORD_SIZE);
+        Temp unit = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
+        // Temp size = tr.genAdd(unit, tr.genMul(unit, length));
+
+        Label loop = Label.createLabel();
+        Label exit = Label.createLabel();
+        Temp zero = tr.genLoadImm4(0);
+        tr.append(Tac.genAdd(obj, obj, size));
+        tr.genMark(loop);
+        tr.append(Tac.genSub(size, size, unit));
+        genBeqz(size, exit);
+        append(Tac.genSub(obj, obj, unit));
+        genStore(zero, obj, 0);
+        genBranch(loop);
+        genMark(exit);
+
+
+
+        foreachStmt.whileExpr.accept(this);
+        foreachStmt.foreachBody.accept(this);
+
+    }
 }
