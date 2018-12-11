@@ -392,6 +392,34 @@ public class Translater {
 		return obj;
 	}
 
+
+	public void copyClass(Temp src, Temp dst, int size){
+        int time = size / OffsetCounter.WORD_SIZE;
+        Temp sizeTmp = genLoadImm4(size);
+        if (time != 0){
+            Temp zero = genLoadImm4(0);
+            if (time < 5){
+                for (int i = 0; i < time; ++ i){
+                    genStore(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * i)), dst, OffsetCounter.WORD_SIZE * i);
+                }
+            } else {
+                Temp unit = genLoadImm4(OffsetCounter.WORD_SIZE);
+                Label loop = Label.createLabel();
+                Label exit = Label.createLabel();
+                dst = genAdd(dst, sizeTmp);
+                genMark(loop);
+                genAssign(dst, genSub(dst, unit));
+                genAssign(sizeTmp, genSub(sizeTmp, unit));
+                genBeqz(sizeTmp, exit);
+                genStore(genAdd(src, sizeTmp), dst, 0);
+                genBranch(loop);
+                genMark(exit);
+            }
+        }
+
+    }
+
+
 	public void genNewForClass(Class c) {
 		currentFuncty = new Functy();
 		currentFuncty.label = Label.createLabel(

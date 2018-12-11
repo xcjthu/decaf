@@ -251,6 +251,10 @@ public class TransPass2 extends Tree.Visitor {
 		tr.genCheckArrayIndex(indexed.array.val, indexed.index.val);
 		
 		Temp esz = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
+		//if (indexed.array.type.isClassType()) {
+
+        //    esz = tr.genLoadImm4(((ClassType)indexed.array.type).getSymbol().getSize());
+        //}
 		Temp t = tr.genMul(indexed.index.val, esz);
 		Temp base = tr.genAdd(indexed.array.val, t);
 		indexed.val = tr.genLoad(base, 0);
@@ -406,7 +410,21 @@ public class TransPass2 extends Tree.Visitor {
 		scopy.ident.accept(this);
 		scopy.expr.accept(this);
 
-        tr.genAssign(scopy.ident.symbol.getTemp(), scopy.expr.val);
+		int sizeTmp = ((ClassType)scopy.expr.type).getSymbol().getSize();
+		sizeTmp = sizeTmp / 4;
+
+
+		Temp addr = scopy.expr.val;
+		Temp wordSize = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
+		Temp dstAddr = scopy.ident.symbol.getTemp();
+
+		for (int i = 0; i < sizeTmp; ++ i) {
+            tr.genStore(addr, dstAddr, 0);
+            tr.append(Tac.genSub(dstAddr, dstAddr, wordSize));
+            tr.append(Tac.genSub(addr, addr, wordSize));
+
+            // tr.genAssign(scopy.ident.symbol.getTemp(), scopy.expr.val);
+        }
 	}
 
 	@Override
@@ -435,31 +453,31 @@ public class TransPass2 extends Tree.Visitor {
         doubleMod.expr1.accept(this);
         doubleMod.expr2.accept(this);
 
-        tr.genCheckNewArraySize(doubleMod.expr2.val);
-        doubleMod.val = tr.genNewArray(doubleMod.expr2.val);
-
-        Temp index = tr.genLoadImm4(0);
-        Temp one = tr.genLoadImm4(1);
-        Label exit = Label.createLabel();
-        Label loop = Label.createLabel();
-        tr.genMark(loop);
-        Temp cond = tr.genLes(index, doubleMod.expr2.val);
-        tr.genBeqz(cond, exit);
         Temp esz;
         if (doubleMod.expr1.type.isClassType()){
             esz = tr.genLoadImm4(((ClassType)doubleMod.expr1.type).getSymbol().getSize());
         } else{
             esz = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
         }
+
+        tr.genCheckNewArraySize(doubleMod.expr2.val);
+        doubleMod.val = tr.genNewArray(tr.genMul(doubleMod.expr2.val, esz));
+
+        Temp index = tr.genLoadImm4(0);
+        Temp one = tr.genLoadImm4(1);
+        Temp wordSize = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
+
+        Label exit = Label.createLabel();
+        Label loop = Label.createLabel();
+        tr.genMark(loop);
+        Temp cond = tr.genLes(index, doubleMod.expr2.val);
+        tr.genBeqz(cond, exit);
+
         Temp t = tr.genMul(index, esz);
         Temp base = tr.genAdd(doubleMod.val, t);
         if (doubleMod.expr1.type.isClassType()) {
-            //tr.genStore();
-            int sizeTmp = ((ClassType)doubleMod.expr1.type).getSymbol().getSize();
+            tr.copyClass(doubleMod.expr1.val, base, ((ClassType)doubleMod.expr1.type).getSymbol().getSize());
 
-            for (int i = 1; i < sizeTmp; ++ i)
-                tr.genStore(doubleMod.expr1.val, base, sizeTmp);
-            // tr.genAssign(base, doubleMod.expr1.val);
         } else {
             tr.genStore(doubleMod.expr1.val, base, 0);
         }
@@ -515,26 +533,8 @@ public class TransPass2 extends Tree.Visitor {
     public void visitForeachStmt(Tree.ForeachStmt foreachStmt){
         if (foreachStmt.typel != null)
             foreachStmt.typel.accept(this);
-        Temp tvar = Temp.createTempI4();
-        tvar.sym = foreachStmt.symbol;
-        foreachStmt.symbol.setTemp(tvar);
-        foreachStmt.inExpr.accept(this);
 
-        Temp obj = tr.genLoad(foreachStmt.inExpr.val, -OffsetCounter.WORD_SIZE);
-        Temp unit = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
-        // Temp size = tr.genAdd(unit, tr.genMul(unit, length));
 
-        Label loop = Label.createLabel();
-        Label exit = Label.createLabel();
-        Temp zero = tr.genLoadImm4(0);
-        tr.append(Tac.genAdd(obj, obj, size));
-        tr.genMark(loop);
-        tr.append(Tac.genSub(size, size, unit));
-        genBeqz(size, exit);
-        append(Tac.genSub(obj, obj, unit));
-        genStore(zero, obj, 0);
-        genBranch(loop);
-        genMark(exit);
 
 
 
