@@ -394,13 +394,13 @@ public class Translater {
 
 
 	public void copyClass(Temp src, Temp dst, int size){
-        int time = size / OffsetCounter.WORD_SIZE;
+        int time = size / OffsetCounter.WORD_SIZE - 1;
         Temp sizeTmp = genLoadImm4(size);
         if (time != 0){
             Temp zero = genLoadImm4(0);
             if (time < 5){
                 for (int i = 0; i < time; ++ i){
-                    genStore(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * i)), dst, OffsetCounter.WORD_SIZE * i);
+                    genStore(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), dst, OffsetCounter.WORD_SIZE * (i + 1));
                 }
             } else {
                 Temp unit = genLoadImm4(OffsetCounter.WORD_SIZE);

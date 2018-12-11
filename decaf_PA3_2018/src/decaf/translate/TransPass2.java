@@ -453,19 +453,13 @@ public class TransPass2 extends Tree.Visitor {
         doubleMod.expr1.accept(this);
         doubleMod.expr2.accept(this);
 
-        Temp esz;
-        if (doubleMod.expr1.type.isClassType()){
-            esz = tr.genLoadImm4(((ClassType)doubleMod.expr1.type).getSymbol().getSize());
-        } else{
-            esz = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
-        }
+        Temp esz = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
 
         tr.genCheckNewArraySize(doubleMod.expr2.val);
-        doubleMod.val = tr.genNewArray(tr.genMul(doubleMod.expr2.val, esz));
+        doubleMod.val = tr.genNewArray(doubleMod.expr2.val);
 
         Temp index = tr.genLoadImm4(0);
         Temp one = tr.genLoadImm4(1);
-        Temp wordSize = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
 
         Label exit = Label.createLabel();
         Label loop = Label.createLabel();
@@ -476,8 +470,10 @@ public class TransPass2 extends Tree.Visitor {
         Temp t = tr.genMul(index, esz);
         Temp base = tr.genAdd(doubleMod.val, t);
         if (doubleMod.expr1.type.isClassType()) {
-            tr.copyClass(doubleMod.expr1.val, base, ((ClassType)doubleMod.expr1.type).getSymbol().getSize());
-
+            // tr.copyClass(doubleMod.expr1.val, base, ((ClassType)doubleMod.expr1.type).getSymbol().getSize());
+            Temp tttmp = tr.genDirectCall(((ClassType)doubleMod.expr1.type).getSymbol().getNewFuncLabel(), BaseType.INT);
+            tr.copyClass(doubleMod.expr1.val, tttmp, ((ClassType)doubleMod.expr1.type).getSymbol().getSize());
+            tr.genStore(tttmp, base, 0);
         } else {
             tr.genStore(doubleMod.expr1.val, base, 0);
         }

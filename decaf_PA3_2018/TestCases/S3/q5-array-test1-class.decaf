@@ -16,6 +16,7 @@ class Main {
     	b.seta(10);
     	a = b %% 6;
     	a[1].seta(15);
-
+        a[0].printA();
+        a[1].printA();
 	}
 }
