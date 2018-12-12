@@ -721,12 +721,15 @@ public class TypeCheck extends Tree.Visitor {
                 }
 
                 checkTestExpr(foreachStmt.whileExpr);
+
+                breaks.add(foreachStmt);
                 if (foreachStmt.foreachBody.tag == Tree.BLOCK) {
                     for (Tree s : ((Tree.Block) foreachStmt.foreachBody).block)
                         s.accept(this);
                 } else {
                     foreachStmt.accept(this);
                 }
+                breaks.pop();
             }
         }
 

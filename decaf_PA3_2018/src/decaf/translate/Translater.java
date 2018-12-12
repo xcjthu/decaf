@@ -123,6 +123,8 @@ public class Translater {
 		}
 	}
 
+
+
 	public void createVTable(Class c) { // 读代码看应该是在创建虚函数表
 		if (c.getVtable() != null) {
 			return;
@@ -360,6 +362,17 @@ public class Translater {
 		genMark(exit);
 	}
 
+	public void genCheckDoubleSize(Temp size){
+        Label exit = Label.createLabel();
+        Temp cond = genLes(size, genLoadImm4(0));
+        genBeqz(cond, exit);
+        Temp msg = genLoadStrConst(RuntimeError.NEGATIVE_ARR_SIZE_DOUBLE_MOD);
+        genParm(msg);
+        genIntrinsicCall(Intrinsic.PRINT_STRING);
+        genIntrinsicCall(Intrinsic.HALT);
+        genMark(exit);
+    }
+
 	public void genCheckNewArraySize(Temp size) {
 		Label exit = Label.createLabel();
 		Temp cond = genLes(size, genLoadImm4(0));
@@ -397,10 +410,13 @@ public class Translater {
         int time = size / OffsetCounter.WORD_SIZE - 1;
         Temp sizeTmp = genLoadImm4(size);
         if (time != 0){
-            Temp zero = genLoadImm4(0);
+            // Temp zero = genLoadImm4(0);
             if (time < 5){
                 for (int i = 0; i < time; ++ i){
-                    genStore(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), dst, OffsetCounter.WORD_SIZE * (i + 1));
+                    //genStore(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), dst, OffsetCounter.WORD_SIZE * (i + 1));
+                    //genStore(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), genAdd(dst, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), 0);
+                    Temp value = genLoad(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), 0);
+                    genStore(value, genAdd(dst, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), 0);
                 }
             } else {
                 Temp unit = genLoadImm4(OffsetCounter.WORD_SIZE);
