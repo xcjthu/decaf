@@ -123,9 +123,7 @@ public class Translater {
 		}
 	}
 
-
-
-	public void createVTable(Class c) { // 读代码看应该是在创建虚函数表
+	public void createVTable(Class c) {
 		if (c.getVtable() != null) {
 			return;
 		}
@@ -362,17 +360,6 @@ public class Translater {
 		genMark(exit);
 	}
 
-	public void genCheckDoubleSize(Temp size){
-        Label exit = Label.createLabel();
-        Temp cond = genLes(size, genLoadImm4(0));
-        genBeqz(cond, exit);
-        Temp msg = genLoadStrConst(RuntimeError.NEGATIVE_ARR_SIZE_DOUBLE_MOD);
-        genParm(msg);
-        genIntrinsicCall(Intrinsic.PRINT_STRING);
-        genIntrinsicCall(Intrinsic.HALT);
-        genMark(exit);
-    }
-
 	public void genCheckNewArraySize(Temp size) {
 		Label exit = Label.createLabel();
 		Temp cond = genLes(size, genLoadImm4(0));
@@ -404,33 +391,6 @@ public class Translater {
 		genMark(exit);
 		return obj;
 	}
-
-
-	public void copyClass(Temp src, Temp dst, int size){
-        int time = size / OffsetCounter.WORD_SIZE - 1;
-        Temp sizeTmp = genLoadImm4(size);
-        if (time != 0){
-            if (time < 5){
-                for (int i = 0; i < time; ++ i){
-                	Temp value = genLoad(genAdd(src, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), 0);
-                    genStore(value, genAdd(dst, genLoadImm4(OffsetCounter.WORD_SIZE * (i + 1))), 0);
-                }
-            } else {
-                Temp unit = genLoadImm4(OffsetCounter.WORD_SIZE);
-                Label loop = Label.createLabel();
-                Label exit = Label.createLabel();
-                dst = genAdd(dst, sizeTmp);
-                genMark(loop);
-                genAssign(dst, genSub(dst, unit));
-                genAssign(sizeTmp, genSub(sizeTmp, unit));
-                genBeqz(sizeTmp, exit);
-                genStore(genAdd(src, sizeTmp), dst, 0);
-                genBranch(loop);
-                genMark(exit);
-            }
-        }
-    }
-
 
 	public void genNewForClass(Class c) {
 		currentFuncty = new Functy();

@@ -471,7 +471,6 @@ public class TransPass2 extends Tree.Visitor {
 
         Temp esz = tr.genLoadImm4(OffsetCounter.WORD_SIZE);
 
-        //tr.genCheckNewArraySize(doubleMod.expr2.val);
         tr.genCheckDoubleSize(doubleMod.expr2.val);
 
         doubleMod.val = tr.genNewArray(doubleMod.expr2.val);
@@ -481,10 +480,7 @@ public class TransPass2 extends Tree.Visitor {
 
         Label exit = Label.createLabel();
         Label loop = Label.createLabel();
-        // Temp base = Temp.createTempI4();
         Temp tttmp = Temp.createTempI4();
-        //tr.genAssign(base, doubleMod.val);
-        // tr.genStore(doubleMod.val, base, 0);
 
         tr.genMark(loop);
         Temp cond = tr.genLes(index, doubleMod.expr2.val);
@@ -541,10 +537,7 @@ public class TransPass2 extends Tree.Visitor {
         Temp base = tr.genAdd(arrayDefault.expr1.val, t);
         Temp tttmp1 = tr.genLoad(base, 0);
         tr.genAssign(tttmp, tttmp1);
-        // tr.genAssign(tttmp, base);
 
-        // arrayDefault.val = tr.genLoad(base, 0);
-        //tr.genStore(base, arrayDefault.val, 0);
         tr.genMark(exit);
         arrayDefault.val = tttmp;
 
