@@ -37,12 +37,21 @@ public class BasicBlock {
     public boolean mark;
 
     public Set<Temp> def;
+    public Set<Pair> defExpand;
+
+    public Map<Temp, Integer> allDef;
+
 
     public Set<Temp> liveUse;
+    public Set<Pair> liveUseExpand;
+
 
     public Set<Temp> liveIn;
+    public Set<Pair> liveInExpand;
 
     public Set<Temp> liveOut;
+    public Set<Pair> liveOutExpand;
+
 
     public Set<Temp> saves;
 
@@ -58,11 +67,21 @@ public class BasicBlock {
 
     public BasicBlock() {
         def = new TreeSet<Temp>(Temp.ID_COMPARATOR);
+        defExpand = new TreeSet<Pair>(Pair.COMPARATOR);
+
         liveUse = new TreeSet<Temp>(Temp.ID_COMPARATOR);
+        liveUseExpand = new TreeSet<Pair>(Pair.COMPARATOR);
+
         liveIn = new TreeSet<Temp>(Temp.ID_COMPARATOR);
+        liveInExpand = new TreeSet<Pair>(Pair.COMPARATOR);
+
         liveOut = new TreeSet<Temp>(Temp.ID_COMPARATOR);
+        liveOutExpand = new TreeSet<Pair>(Pair.COMPARATOR);
+
         next = new int[2];
         asms = new ArrayList<Asm>();
+
+        allDef = new TreeMap<Temp, Integer>(Temp.ID_COMPARATOR);
 
         DUChain = new TreeMap<Pair, Set<Integer>>(Pair.COMPARATOR);
     }
@@ -93,16 +112,35 @@ public class BasicBlock {
                 /* use op1 and op2, def op0 */
                     if (tac.op1.lastVisitedBB != bbNum) {
                         liveUse.add(tac.op1);
+                        liveUseExpand.add(new Pair(tac.id, tac.op1));
                         tac.op1.lastVisitedBB = bbNum;
+                    } else {
+                        if (allDef.get(tac.op1) != null){
+                            DUChain.get(new Pair(allDef.get(tac.op1), tac.op1)).add(tac.id);
+                        } else {
+                            liveUseExpand.add(new Pair(tac.id, tac.op1));
+                        }
                     }
+
                     if (tac.op2.lastVisitedBB != bbNum) {
                         liveUse.add(tac.op2);
+                        liveUseExpand.add(new Pair(tac.id, tac.op2));
                         tac.op2.lastVisitedBB = bbNum;
+                    } else {
+                        if (allDef.get(tac.op2) != null){
+                            DUChain.get(new Pair(allDef.get(tac.op2), tac.op2)).add(tac.id);
+                        } else {
+                            liveUseExpand.add(new Pair(tac.id, tac.op2));
+                        }
                     }
+
                     if (tac.op0.lastVisitedBB != bbNum) {
                         def.add(tac.op0);
+                        defExpand.add(new Pair(tac.id, tac.op0));
                         tac.op0.lastVisitedBB = bbNum;
                     }
+                    allDef.put(tac.op0, tac.id);
+                    DUChain.put(new Pair(tac.id, tac.op0), new TreeSet<Integer>());
                     break;
                 case NEG:
                 case LNOT:
@@ -112,12 +150,25 @@ public class BasicBlock {
 				/* use op1, def op0 */
                     if (tac.op1.lastVisitedBB != bbNum) {
                         liveUse.add(tac.op1);
+                        liveUseExpand.add(new Pair(tac.id, tac.op1));
                         tac.op1.lastVisitedBB = bbNum;
+                    } else {
+                        if (allDef.get(tac.op1) != null){
+                            DUChain.get(new Pair(allDef.get(tac.op1), tac.op1)).add(tac.id);
+                        } else {
+                            liveUseExpand.add(new Pair(tac.id, tac.op1));
+                        }
                     }
                     if (tac.op0 != null && tac.op0.lastVisitedBB != bbNum) {  // in INDIRECT_CALL with return type VOID,
                         // tac.op0 is null
                         def.add(tac.op0);
+                        defExpand.add(new Pair(tac.id, tac.op0));
+
                         tac.op0.lastVisitedBB = bbNum;
+                    }
+                    if (tac.op0 != null){
+                        allDef.put(tac.op0, tac.id);
+                        DUChain.put(new Pair(tac.id, tac.op0), new TreeSet<Integer>());
                     }
                     break;
                 case LOAD_VTBL:
@@ -129,25 +180,52 @@ public class BasicBlock {
                     if (tac.op0 != null && tac.op0.lastVisitedBB != bbNum) {  // in DIRECT_CALL with return type VOID,
                         // tac.op0 is null
                         def.add(tac.op0);
+                        defExpand.add(new Pair(tac.id, tac.op0));
                         tac.op0.lastVisitedBB = bbNum;
+                    }
+                    if (tac.op0 != null){
+                        allDef.put(tac.op0, tac.id);
+                        DUChain.put(new Pair(tac.id, tac.op0), new TreeSet<Integer>());
                     }
                     break;
                 case STORE:
 				/* use op0 and op1*/
                     if (tac.op0.lastVisitedBB != bbNum) {
                         liveUse.add(tac.op0);
+                        liveUseExpand.add(new Pair(tac.id, tac.op0));
                         tac.op0.lastVisitedBB = bbNum;
+                    }else {
+                        if (allDef.get(tac.op0) != null){
+                            DUChain.get(new Pair(allDef.get(tac.op0), tac.op0)).add(tac.id);
+                        } else {
+                            liveUseExpand.add(new Pair(tac.id, tac.op0));
+                        }
                     }
+
                     if (tac.op1.lastVisitedBB != bbNum) {
                         liveUse.add(tac.op1);
+                        liveUseExpand.add(new Pair(tac.id, tac.op1));
                         tac.op1.lastVisitedBB = bbNum;
+                    } else {
+                        if (allDef.get(tac.op1) != null){
+                            DUChain.get(new Pair(allDef.get(tac.op1), tac.op1)).add(tac.id);
+                        } else {
+                            liveUseExpand.add(new Pair(tac.id, tac.op1));
+                        }
                     }
                     break;
                 case PARM:
 				/* use op0 */
                     if (tac.op0.lastVisitedBB != bbNum) {
                         liveUse.add(tac.op0);
+                        liveUseExpand.add(new Pair(tac.id, tac.op0));
                         tac.op0.lastVisitedBB = bbNum;
+                    } else {
+                        if (allDef.get(tac.op0) != null){
+                            DUChain.get(new Pair(allDef.get(tac.op0), tac.op0)).add(tac.id);
+                        } else {
+                            liveUseExpand.add(new Pair(tac.id, tac.op0));
+                        }
                     }
                     break;
                 default:
@@ -157,9 +235,30 @@ public class BasicBlock {
         }
         if (var != null && var.lastVisitedBB != bbNum) {
             liveUse.add(var);
+            liveUseExpand.add(new Pair(endId, var));
             var.lastVisitedBB = bbNum;
+        } else{
+            if (var != null) {
+                if (allDef.get(var) != null) {
+                    DUChain.get(new Pair(allDef.get(var), var)).add(endId);
+                } else {
+                    liveUseExpand.add(new Pair(endId, var));
+                }
+            }
         }
         liveIn.addAll(liveUse);
+        liveInExpand.addAll(liveUseExpand);
+    }
+
+    public void computeUseFromOther(){
+        // System.out.println(liveOutExpand.size());
+        for (Pair pair: liveOutExpand) {
+            if (allDef.get(pair.tmp) != null) {
+                // System.out.println("gg xcj");
+                int defloc = allDef.get(pair.tmp);
+                DUChain.get(new Pair(defloc, pair.tmp)).add(pair.pos);
+            }
+        }
     }
 
     public void analyzeLiveness() {
@@ -339,8 +438,10 @@ public class BasicBlock {
                 if (pair != null) {
                     Set<Integer> locations = DUChain.get(pair);
                     if (locations != null) {
-                        for (Integer loc : locations) {
-                            pw.print(loc + " ");
+                        if (locations.size() != 0) {
+                            for (Integer loc : locations) {
+                                pw.print(loc + " ");
+                            }
                         }
                     }
                 }

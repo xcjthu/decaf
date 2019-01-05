@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 import decaf.tac.Functy;
 import decaf.tac.Tac;
@@ -184,18 +185,45 @@ public class FlowGraph implements Iterable<BasicBlock> {
                 for (int i = 0; i < 2; i++) {
                     if (bb.next[i] >= 0) { // Not RETURN
                         bb.liveOut.addAll(bbs.get(bb.next[i]).liveIn);
+                        bb.liveOutExpand.addAll(bbs.get(bb.next[i]).liveInExpand);
                     }
                 }
                 bb.liveOut.removeAll(bb.def);
-                if (bb.liveIn.addAll(bb.liveOut))
+
+                /*  */
+                Set<Pair> removed = new TreeSet<Pair>(Pair.COMPARATOR);
+                for (Pair pair: bb.liveOutExpand){
+                    if (bb.def.contains(pair.tmp)) {
+                        //bb.liveOutExpand.remove(pair);
+                        removed.add(pair);
+                    }
+                }
+                bb.liveOutExpand.removeAll(removed);
+
+
+                for (Pair pair: bb.liveOutExpand){
+                    if (bb.allDef.get(pair.tmp) == null){
+                        if (bb.liveInExpand.add(pair))
+                            changed = true;
+                    }
+                }
+
+                if (bb.liveIn.addAll(bb.liveOut)) {
                     changed = true;
+                    // bb.liveInExpand.addAll(bb.liveOutExpand);
+                }
                 for (int i = 0; i < 2; i++) {
                     if (bb.next[i] >= 0) { // Not RETURN
                         bb.liveOut.addAll(bbs.get(bb.next[i]).liveIn);
+                        bb.liveOutExpand.addAll(bbs.get(bb.next[i]).liveInExpand);
                     }
                 }
             }
         } while (changed);
+
+        for (BasicBlock bb: bbs){
+            bb.computeUseFromOther();
+        }
     }
 
     public void simplify() {
