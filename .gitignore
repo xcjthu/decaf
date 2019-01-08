@@ -5,3 +5,5 @@
 **/.DS_Store
 **/.settings
 decaf_PA*/.*
+*.zip
+**/report.pdf
